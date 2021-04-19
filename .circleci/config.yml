@@ -17,7 +17,7 @@ aliases:
       default: drpsychick
       type: string
     tag:
-      default: dind
+      default: latest
       type: string
   - &docker-dind
     - image: docker:dind
@@ -47,7 +47,7 @@ aliases:
         command: |
           cd images
           for img in $(ls -1d *); do
-            echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
+            echo "Building << parameters.repo >>/$img:<< parameters.tag >> = << parameters.version >>"
             docker buildx build --progress plain --platform << parameters.platforms >> \
               --build-arg VERSION=<< parameters.version >> \
               --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
@@ -75,3 +75,4 @@ workflows:
           matrix:
             parameters:
               buildx_version: ["0.5.0"]
+              tag: ["20-0.5.0"]
