@@ -43,6 +43,16 @@ aliases:
           docker buildx create xbuilder --name xbuilder --use
           docker buildx inspect --bootstrap
     - run:
+        name: Build without buildx
+        command: |
+          cd images
+          for img in $(ls -1d *); do
+            echo "Building << parameters.repo >>/$img:<< parameters.tag >> = << parameters.version >>"
+            docker build --build-arg VERSION=<< parameters.version >> \
+              --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
+              -t << parameters.repo >>/$img:<< parameters.tag >> .
+          done
+    - run:
         name: Build images
         command: |
           cd images
