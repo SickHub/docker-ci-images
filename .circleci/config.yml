@@ -32,7 +32,7 @@ aliases:
           for img in $(ls -1d *); do
             docker buildx build --progress plain --platform $PLATFORMS --build-arg VERSION=$VERSION \
               --build-arg BUILDX_VERSION=$BUILDX_VERSION \
-              -t $REPO/$img:$TAG .
+              -t $REPO/$img:$TAG --load .
           done
 
 jobs:
