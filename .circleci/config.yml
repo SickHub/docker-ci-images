@@ -8,11 +8,11 @@ aliases:
         name: Install buildx
         command: |
           apk add --no-cache curl
-          mkdir -p ~/.docker/cli-plugins; \
-          fileName="buildx-v${BUILDX_VERSION}.linux-${BUILDX_ARCH}"; \
-          url="${BUILDX_URL}/download/v${BUILDX_VERSION}/${fileName}"; \
-          curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url \
-          chmod a+x ~/.docker/cli-plugins/docker-buildx \
+          mkdir -p ~/.docker/cli-plugins
+          fileName="buildx-v${BUILDX_VERSION}.linux-${BUILDX_ARCH}"
+          url="${BUILDX_URL}/download/v${BUILDX_VERSION}/${fileName}"
+          curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
+          chmod a+x ~/.docker/cli-plugins/docker-buildx
           docker buildx install
           echo 'export DOCKER_CLI_EXPERIMENTAL="enabled"' >> $BASH_ENV
           echo 'export DOCKER_BUILDKIT=1' >> $BASH_ENV
@@ -31,7 +31,7 @@ aliases:
           cd images
           for img in $(ls -1d *); do
             docker buildx build --progress plain --platform $PLATFORMS --build-arg VERSION=$VERSION \
-              --build-arg BUILDX_VERSION=$BUILDX_VERSION
+              --build-arg BUILDX_VERSION=$BUILDX_VERSION \
               -t $REPO/$img:$TAG .
           done
 
