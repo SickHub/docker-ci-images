@@ -13,8 +13,9 @@ RUN mkdir -p ~/.docker/cli-plugins; \
     fileName="buildx-v${BUILDX_VERSION}.linux-${BUILDX_ARCH}"; \
     url="${BUILDX_URL}/download/v${BUILDX_VERSION}/${fileName}"; \
     curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url \
-    && chmod a+x ~/.docker/cli-plugins/docker-buildx \
-    && docker buildx install
+    && chmod a+x ~/.docker/cli-plugins/docker-buildx; \
+    export DOCKER_CLI_EXPERIMENTAL="enabled"; \
+    docker buildx install
 
 # cleanup
 RUN rm -f /var/cache/apk/*
