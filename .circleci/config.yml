@@ -28,6 +28,7 @@ aliases:
     - run:
         name: Build images
         command: |
+          echo "$DOCKER_CLI_EXPERIMENTAL - $DOCKER_BUILDKIT"
           cd images
           for img in $(ls -1d *); do
             docker buildx build --progress plain --platform $PLATFORMS --build-arg VERSION=$VERSION \
