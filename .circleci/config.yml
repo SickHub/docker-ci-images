@@ -23,6 +23,8 @@ aliases:
     - image: docker:dind
   - &build
     - checkout
+    - setup_remote_docker:
+        version: 20.10.2
     - run:
         name: Install buildx
         command: |
@@ -34,8 +36,6 @@ aliases:
           chmod a+x ~/.docker/cli-plugins/docker-buildx
           export DOCKER_CLI_EXPERIMENTAL="enabled"
           docker buildx install
-    - setup_remote_docker:
-        version: 20.10.2
     - run:
         name: Bootstrap buildx
         command: |
@@ -51,6 +51,7 @@ aliases:
           export DOCKER_BUILDKIT=1
           cd images
           for img in $(ls -1d *); do
+            echo "Building << parameters.repo >>/${img}:<< parameters.tag >>"
             docker buildx build --progress plain --platform << parameters.platforms >> \
               --build-arg VERSION=<< parameters.version >> \
               --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
