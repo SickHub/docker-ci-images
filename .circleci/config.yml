@@ -34,12 +34,10 @@ aliases:
           url="<< parameters.buildx_url >>/download/v<< parameters.buildx_version >>/${fileName}"
           curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
           chmod a+x ~/.docker/cli-plugins/docker-buildx
-          export DOCKER_CLI_EXPERIMENTAL="enabled"
           docker buildx install
     - run:
         name: Bootstrap buildx
         command: |
-          export DOCKER_CLI_EXPERIMENTAL="enabled"
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker context create xbuilder
           docker buildx create xbuilder --name xbuilder --use
@@ -47,15 +45,13 @@ aliases:
     - run:
         name: Build images
         command: |
-          export DOCKER_CLI_EXPERIMENTAL="enabled"
-          export DOCKER_BUILDKIT=1
           cd images
           for img in $(ls -1d *); do
-            echo "Building << parameters.repo >>/$img\:<< parameters.tag >>"
+            echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
             docker buildx build --progress plain --platform << parameters.platforms >> \
               --build-arg VERSION=<< parameters.version >> \
               --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
-              -t << parameters.repo >>/$img\:<< parameters.tag >> .
+              -t << parameters.repo >>/$img:<< parameters.tag >> .
           done
 
 jobs:
