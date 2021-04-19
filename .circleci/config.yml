@@ -7,6 +7,18 @@ aliases:
     buildx_version:
       default: 0.5.1
       type: string
+    platforms:
+      default: linux/amd64
+      type: string
+    version:
+      default: dind
+      type: string
+    repo:
+      default: drpsychick
+      type: string
+    tag:
+      default: dind
+      type: string
   - &docker-dind
     - image: docker:dind
   - &build
@@ -15,21 +27,19 @@ aliases:
         name: Install buildx
         command: |
           apk add --no-cache curl
-          export BUILDX_URL=<< parameters.buildx_url >>
-          export BUILDX_VERSION=<< parameters.buildx_version >>
           mkdir -p ~/.docker/cli-plugins
-          fileName="buildx-v${BUILDX_VERSION}.linux-${BUILDX_ARCH}"
-          url="${BUILDX_URL}/download/v${BUILDX_VERSION}/${fileName}"
+          fileName="buildx-v<< parameters.buildx_version >>.linux-amd64"
+          url="<< parameters.buildx_url >>/download/v<< parameters.buildx_version >>/${fileName}"
           curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
           chmod a+x ~/.docker/cli-plugins/docker-buildx
+          export DOCKER_CLI_EXPERIMENTAL="enabled"
           docker buildx install
-          echo 'export DOCKER_CLI_EXPERIMENTAL="enabled"' >> $BASH_ENV
-          echo 'export DOCKER_BUILDKIT=1' >> $BASH_ENV
     - setup_remote_docker:
         version: 20.10.2
     - run:
         name: Bootstrap buildx
         command: |
+          export DOCKER_CLI_EXPERIMENTAL="enabled"
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker context create xbuilder
           docker buildx create xbuilder --name xbuilder --use
@@ -37,39 +47,24 @@ aliases:
     - run:
         name: Build images
         command: |
-          export BUILDX_VERSION=<< parameters.buildx_version >>
           export DOCKER_CLI_EXPERIMENTAL="enabled"
           export DOCKER_BUILDKIT=1
-          echo "$VERSION - $BUILDX_VERSION"
           cd images
           for img in $(ls -1d *); do
-            docker buildx build --progress plain --platform $PLATFORMS --build-arg VERSION=$VERSION \
-              --build-arg BUILDX_VERSION=$BUILDX_VERSION \
-              -t $REPO/$img:$TAG --load .
+            docker buildx build --progress plain --platform << parameters.platforms >> \
+              --build-arg VERSION=<< parameters.version >> \
+              --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
+              -t << parameters.repo >>/${img}:<< parameters.tag >> .
           done
 
 jobs:
   build-latest:
     parameters: *parameters
-    environment:
-      BUILDX_ARCH: amd64
-      PLATFORMS: linux/amd64,linux/arm64
-      VERSION: dind
-      REPO: drpsychick
-      TAG: latest
     docker: *docker-dind
     resource_class: small
     steps: *build
   build-20-dind:
     parameters: *parameters
-    environment:
-      BUILDX_URL: https://github.com/docker/buildx/releases
-      BUILDX_VERSION: 0.5.1
-      BUILDX_ARCH: amd64
-      PLATFORMS: linux/amd64
-      VERSION: 20-dind
-      REPO: drpsychick
-      TAG: 20-dind
     docker: *docker-dind
     resource_class: small
     steps: *build
