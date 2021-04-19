@@ -20,7 +20,6 @@ RUN mkdir -p ~/.docker/cli-plugins; \
 RUN rm -f /var/cache/apk/*
 
 # start daemon with `dind dockerd &`
-ENV DOCKER_CLI_EXPERIMENTAL="enabled" \
-    DOCKER_HOST=unix:///var/run/docker.sock
+ENV DOCKER_CLI_EXPERIMENTAL="enabled"
 
 RUN docker buildx version
