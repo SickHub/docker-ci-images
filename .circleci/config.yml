@@ -38,7 +38,8 @@ aliases:
         name: Build images
         command: |
           export BUILDX_VERSION=<< parameters.buildx_version >>
-          echo "$DOCKER_CLI_EXPERIMENTAL - $DOCKER_BUILDKIT"
+          export DOCKER_CLI_EXPERIMENTAL="enabled"
+          export DOCKER_BUILDKIT=1
           echo "$VERSION - $BUILDX_VERSION"
           cd images
           for img in $(ls -1d *); do
@@ -60,6 +61,7 @@ jobs:
     resource_class: small
     steps: *build
   build-20-dind:
+    parameters: *parameters
     environment:
       BUILDX_URL: https://github.com/docker/buildx/releases
       BUILDX_VERSION: 0.5.1
