@@ -51,11 +51,11 @@ aliases:
           export DOCKER_BUILDKIT=1
           cd images
           for img in $(ls -1d *); do
-            echo "Building << parameters.repo >>/${img}:<< parameters.tag >>"
+            echo "Building << parameters.repo >>/$img\:<< parameters.tag >>"
             docker buildx build --progress plain --platform << parameters.platforms >> \
               --build-arg VERSION=<< parameters.version >> \
               --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
-              -t << parameters.repo >>/${img}:<< parameters.tag >> .
+              -t << parameters.repo >>/$img\:<< parameters.tag >> .
           done
 
 jobs:
