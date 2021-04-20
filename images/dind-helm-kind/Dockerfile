@@ -7,7 +7,7 @@ RUN apk add --update --no-cache py3-pip socat \
 
 ARG CT_URL=https://github.com/helm/chart-testing/releases
 ARG CT_VERSION=3.3.1
-ARG TARGETARCH
+ARG TARGETARCH=amd64
 ARG CT_ARCH=${TARGETARCH}
 RUN mkdir ct; cd ct; \
     curl -sSLo ct-${CT_VERSION}.tgz "${CT_URL}/download/v${CT_VERSION}/chart-testing_${CT_VERSION}_linux_${CT_ARCH}.tar.gz" \
