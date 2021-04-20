@@ -71,20 +71,21 @@ aliases:
             else
 
               # determine tag version
+              VERSION=<< parameters.version >>
               TAG=<< parameters.version >>-<< parameters.buildx_version >>
               if [ "$img" = "dind-buildx-helm" ]; then
+                VERSION=$VERSION-<< parameters.buildx_version >>
                 TAG=$TAG-<< parameters.kubectl_version >>-<< parameters.helm_version >>
               fi
 
               docker buildx build --progress plain --platform << parameters.platforms >> \
-                --build-arg VERSION=<< parameters.version >> \
+                --build-arg VERSION=$VERSION \
                 --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
                 --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
                 --build-arg HELM_VERSION=<< parameters.helm_version >> \
                 --tag << parameters.repo >>/$img:$TAG --push ./$img/
             fi
           done
-          docker image ls
 
 jobs:
   build-latest:
