@@ -84,8 +84,8 @@ aliases:
                 TAG=$TAG-<< parameters.kubectl_version >>-<< parameters.helm_version >>
               fi
               if [ "$img" = "dind-buildx-helm-kind" ]; then
-                VERSION=$VERSION-<< parameters.kubectl_version >>-<< parameters.helm_version >>
-                TAG=$TAG-<< parameters.kind_version >>
+                VERSION=$VERSION-<< parameters.buildx_version >>-<< parameters.kubectl_version >>-<< parameters.helm_version >>
+                TAG=$TAG-<< parameters.kubectl_version >>-<< parameters.helm_version >>-<< parameters.kind_version >>
               fi
 
               docker buildx build --progress plain --platform << parameters.platforms >> \
