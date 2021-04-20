@@ -42,7 +42,7 @@ aliases:
         command: |
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker context create xbuilder
-          docker buildx create xbuilder --name xbuilder --use --platform << parameters.platforms >>
+          docker buildx create xbuilder --name xbuilder --use
           docker buildx inspect --bootstrap
     - run:
         name: Build images
@@ -76,9 +76,10 @@ workflows:
       - build-latest:
           matrix:
             parameters:
-              platforms: ["linux/amd64","linux/arm64"]
+              platforms: ["linux/amd64,linux/arm64"]
       - build-20-dind:
           matrix:
             parameters:
+              version: ["20-dind"]
               buildx_version: ["0.5.0"]
               tag: ["20-0.5.0"]
