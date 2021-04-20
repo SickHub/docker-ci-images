@@ -88,12 +88,7 @@ aliases:
           done
 
 jobs:
-  build-latest:
-    parameters: *parameters
-    docker: *docker-dind
-    resource_class: small
-    steps: *build
-  build-20-dind:
+  build:
     parameters: *parameters
     docker: *docker-dind
     resource_class: small
@@ -103,15 +98,23 @@ workflows:
   version: 2
   chart-test:
     jobs:
-      - build-latest:
+      - build:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
-      - build-20-dind:
+      - build:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
               version: ["20-dind"]
-              buildx_version: ["0.5.0"]
-              kubectl_version: ["1.20.0"]
+              buildx_version: ["0.5.1"]
+              kubectl_version: ["1.20.4"]
               helm_version: ["3.5.0"]
+      - build:
+          matrix:
+            parameters:
+              platforms: ["linux/amd64,linux/arm64"]
+              version: ["19-dind"]
+              buildx_version: ["0.5.1"]
+              kubectl_version: ["1.19.4"]
+              helm_version: ["3.4.2"]
