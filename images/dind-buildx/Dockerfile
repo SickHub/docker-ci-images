@@ -4,12 +4,14 @@ FROM docker:$VERSION
 RUN apk add --update --no-cache ca-certificates git curl jq
 
 # install buildx
-# TARGETARCH requires 'DOCKER_BUILDKIT=1'
-ARG TARGETARCH=amd64
 ARG BUILDX_URL=https://github.com/docker/buildx/releases
 ARG BUILDX_VERSION=0.5.1
+# TARGETARCH requires 'DOCKER_BUILDKIT=1'
+ARG TARGETARCH
 ARG BUILDX_ARCH=${TARGETARCH}
-RUN mkdir -p ~/.docker/cli-plugins; \
+
+RUN if [ -z "$BUILDX_ARCH" ]; then BUILDX_ARCH=amd64; fi; \
+    mkdir -p ~/.docker/cli-plugins; \
     fileName="buildx-v${BUILDX_VERSION}.linux-${BUILDX_ARCH}"; \
     url="${BUILDX_URL}/download/v${BUILDX_VERSION}/${fileName}"; \
     curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url \

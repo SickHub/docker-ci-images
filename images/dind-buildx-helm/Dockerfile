@@ -4,10 +4,11 @@ FROM drpsychick/dind-buildx:$VERSION
 # install kubectl: https://github.com/kubernetes/kubectl/releases
 ARG KUBECTL_URL=https://dl.k8s.io/release
 ARG KUBECTL_VERSION=1.21.0
-ARG TARGETARCH=amd64
+ARG TARGETARCH
 ARG KUBECTL_ARCH=${TARGETARCH}
 
-RUN URL="${KUBECTL_URL}/v${KUBECTL_VERSION}/bin/linux/${KUBECTL_ARCH}/kubectl"; \
+RUN if [ -z "$KUBECTL_ARCH" ]; then KUBECTL_ARCH=amd64; fi; \
+    URL="${KUBECTL_URL}/v${KUBECTL_VERSION}/bin/linux/${KUBECTL_ARCH}/kubectl"; \
     CHECKSUM_URL="${KUBECTL_URL}/v${KUBECTL_VERSION}/bin/linux/${KUBECTL_ARCH}/kubectl.sha256"; \
     curl -sSL -o kubectl-sha256 "${CHECKSUM_URL}" \
     && curl -sSL -o kubectl-${KUBECTL_VERSION} "${URL}" \
@@ -21,7 +22,8 @@ ARG HELM_URL=https://get.helm.sh
 ARG HELM_VERSION=3.5.4
 ARG HELM_ARCH=${TARGETARCH}
 
-RUN TAR_FILE="helm-v${HELM_VERSION}-linux-${HELM_ARCH}.tar.gz"; \
+RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
+    TAR_FILE="helm-v${HELM_VERSION}-linux-${HELM_ARCH}.tar.gz"; \
     curl -sSL ${HELM_URL}/${TAR_FILE} | tar xz \
     && mv linux-${HELM_ARCH}/helm /usr/bin/helm \
     && chmod +x /usr/bin/helm \

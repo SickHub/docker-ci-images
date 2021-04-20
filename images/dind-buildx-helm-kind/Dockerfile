@@ -6,9 +6,10 @@ RUN apk add --update --no-cache py3-pip socat \
 
 ARG CT_URL=https://github.com/helm/chart-testing/releases
 ARG CT_VERSION=3.3.1
-ARG TARGETARCH=amd64
+ARG TARGETARCH
 ARG CT_ARCH=${TARGETARCH}
-RUN mkdir ct; cd ct; \
+RUN if [ -z "$CT_ARCH" ]; then CT_ARCH=amd64; fi; \
+    mkdir ct; cd ct; \
     curl -sSLo ct-${CT_VERSION}.tgz "${CT_URL}/download/v${CT_VERSION}/chart-testing_${CT_VERSION}_linux_${CT_ARCH}.tar.gz" \
     && tar -xzf ct-${CT_VERSION}.tgz \
     && chmod +x ct \
@@ -19,7 +20,8 @@ RUN mkdir ct; cd ct; \
 ARG KIND_URL=https://github.com/kubernetes-sigs/kind/releases
 ARG KIND_VERSION=0.10.0
 ARG KIND_ARCH=${TARGETARCH}
-RUN curl -sSLo kind-${KIND_VERSION} "${KIND_URL}/download/v${KIND_VERSION}/kind-linux-${KIND_ARCH}" \
+RUN if [ -z "$KIND_ARCH" ]; then KIND_ARCH=amd64; fi; \
+    curl -sSLo kind-${KIND_VERSION} "${KIND_URL}/download/v${KIND_VERSION}/kind-linux-${KIND_ARCH}" \
     && chmod +x kind-${KIND_VERSION} \
     && mv kind-${KIND_VERSION} /usr/local/bin/kind
 
