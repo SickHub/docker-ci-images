@@ -1,7 +1,7 @@
 ARG VERSION=latest
 FROM drpsychick/dind-buildx-helm:$VERSION
 
-RUN apk --no-cache add curl git py3-pip socat \
+RUN apk add --update --no-cache py3-pip socat \
     && pip3 install --upgrade pip \
     && pip3 install yamllint yamale
 
@@ -23,6 +23,9 @@ ARG KIND_ARCH=${TARGETARCH}
 RUN curl -sSLo kind-${KIND_VERSION} "${KIND_URL}/download/v${KIND_VERSION}/kind-linux-${KIND_ARCH}" \
     && chmod +x kind-${KIND_VERSION} \
     && mv kind-${KIND_VERSION} /usr/local/bin/kind
+
+# cleanup
+RUN rm -f /var/cache/apk/*
 
 RUN docker buildx version \
     && kubectl version --client=true \

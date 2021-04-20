@@ -77,11 +77,8 @@ aliases:
                 VERSION=<< parameters.version >>
                 TAG=<< parameters.kubectl_version >>
               fi
-              if [ "$img" = "dind-buildx-helm-kind" ]; then
+              if [ "$img" = "dind-buildx-helm-kind" -o "$img" = "dind-helm-kind" ]; then
                 VERSION=<< parameters.kubectl_version >>
-                TAG=<< parameters.kind_version >>
-              fi
-              if [ "$img" = "dind-helm-kind" ]; then
                 TAG=<< parameters.kind_version >>
               fi
 
@@ -112,6 +109,48 @@ workflows:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
+      - build:
+          matrix:
+            parameters:
+              platforms: ["linux/amd64,linux/arm64"]
+              version: ["20-dind"]
+              kubectl_version: ["1.20.4"]
+              helm_version: ["3.5.0"]
+              kind_version: [ "0.10.0" ]
+      - build:
+          matrix:
+            parameters:
+              platforms: ["linux/amd64,linux/arm64"]
+              version: ["19-dind"]
+              kubectl_version: ["1.19.4"]
+              helm_version: ["3.4.2"]
+              kind_version: ["0.9.0"]
+  # build 'latest' weekly
+  weekly:
+    triggers:
+      - schedule:
+          # mondays, 6:03 am, UTC
+          cron: "3 6 * * 1"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              platforms: ["linux/amd64,linux/arm64"]
+  # build other tags monthly
+  monthly:
+    triggers:
+      - schedule:
+          # first day of month, 5:03 am, UTC
+          cron: "3 5 1 * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
       - build:
           matrix:
             parameters:
