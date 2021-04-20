@@ -20,7 +20,6 @@ RUN URL="${KUBECTL_URL}/v${KUBECTL_VERSION}/bin/linux/${KUBECTL_ARCH}/kubectl"; 
 ARG HELM_URL=https://get.helm.sh
 ARG HELM_VERSION=3.5.4
 ARG HELM_ARCH=${TARGETARCH}
-https://get.helm.sh/helm-v3.5.4-linux-arm64.tar.gz
 
 RUN TAR_FILE="helm-v${HELM_VERSION}-linux-${HELM_ARCH}.tar.gz"; \
     curl -sSL ${HELM_URL}/${TAR_FILE} | tar xz \
