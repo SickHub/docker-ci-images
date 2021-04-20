@@ -3,20 +3,14 @@
 version: 2.1
 aliases:
   - &parameters
-    buildx_url:
-      default: https://github.com/docker/buildx/releases
+    version:
+      default: latest
       type: string
     buildx_version:
       default: 0.5.1
       type: string
-    kubectl_url:
-      default: https://dl.k8s.io/release
-      type: string
     kubectl_version:
       default: 1.21.0
-      type: string
-    helm_url:
-      default: https://get.helm.sh
       type: string
     helm_version:
       default: 3.5.4
@@ -29,9 +23,6 @@ aliases:
       type: string
     platforms:
       default: linux/amd64
-      type: string
-    version:
-      default: latest
       type: string
     repo:
       default: drpsychick
@@ -68,10 +59,10 @@ aliases:
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin &> /dev/null || exit 1
           cd images
           for img in $(ls -1d *); do
-            echo "Building << parameters.repo >>/$img:<< parameters.tag >> = << parameters.version >>"
             if [ "latest" = "<< parameters.version >>" ]; then
 
               # use default ARGs of image
+              echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
               docker buildx build --progress plain --platform << parameters.platforms >> \
                 --tag << parameters.repo >>/$img:<< parameters.tag >> --push ./$img/
             else
@@ -91,6 +82,7 @@ aliases:
                 TAG=<< parameters.kind_version >>
               fi
 
+              echo "Building << parameters.repo >>/$img:$TAG based on $VERSION"
               docker buildx build --progress plain --platform << parameters.platforms >> \
                 --build-arg VERSION=$VERSION \
                 --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
@@ -111,7 +103,7 @@ jobs:
 
 workflows:
   version: 2
-  chart-test:
+  build-images:
     jobs:
       - build:
           matrix:
@@ -122,14 +114,14 @@ workflows:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
               version: ["20-dind"]
-              buildx_version: ["0.5.1"]
               kubectl_version: ["1.20.4"]
               helm_version: ["3.5.0"]
+              kind_version: [ "0.10.0" ]
       - build:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
               version: ["19-dind"]
-              buildx_version: ["0.5.1"]
               kubectl_version: ["1.19.4"]
               helm_version: ["3.4.2"]
+              kind_version: ["0.9.0"]

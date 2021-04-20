@@ -25,12 +25,12 @@ you can use the image that has all the tools you need for your pipeline.
 Included tools:
 * `git`, `curl`, `jq`
 
-## Build multi-arch docker images
-[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx/tags) 
-[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/) 
-[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/) 
+## `dind-buildx`
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx/tags)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/)
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/)
 
-Use `dind-buildx`:
+Build multi-arch docker images
 * based on `docker:dind`
 * includes `buildx` so you can build for multiple architectures
 
@@ -47,13 +47,13 @@ docker buildx inspect --bootstrap
 
 ### Examples
 * Circle CI: https://github.com/DrPsychick/docker-influxdb/blob/master/.circleci/config.yml
+  
+## `dind-buildx-helm`
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/tags)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/)
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-helm/)
 
-## Build images and deploy with helm
-[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/tags) 
-[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/) 
-[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-helm/) 
-
-Use `dind-buildx-helm`:
+Build images and deploy with helm
 * based on `drpsychick/dind-buildx`
 * includes `kubectl` and `helm` so you can build your image and deploy with kubectl and/or helm
 
@@ -62,12 +62,12 @@ Same as above plus:
 * provide kubernetes config and point to it with `$KUBECONFIG`
 * use `kubectl` and `helm` to deploy to your kubernetes cluster
 
-## Build images, test helm charts and deploy to kind
-[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm-kind?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/tags) 
-[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/) 
-[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/) 
+## `dind-buildx-helm-kind`
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm-kind?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/tags)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/)
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/)
 
-Use `dind-buildx-helm-kind`:
+Build images, test helm charts and deploy to kind
 * based on `drpsychick/dind-buildx-helm`
 * includes `ct` and `kind` so you can test your helm chart and deploy it to a kind node
 
@@ -77,3 +77,20 @@ Same as above plus:
 * optionally forward localhost to docker engine host, if using remote docker engine
 * test install your charts using `ct`
 
+### Examples
+* Circle CI: https://github.com/DrPsychick/ark-server-charts/blob/master/.circleci/config.yml
+
+## `dind-helm-kind`
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-helm-kind?sort=date)](https://hub.docker.com/r/drpsychick/dind-helm-kind/tags)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-helm-kind/)
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-helm-kind/)
+
+Build images, test helm charts and deploy to kind (without `buildx`)
+* based on `docker:dind`
+* includes `kubectl`, `helm`, `ct` and `kind` so you can test your helm chart and deploy it to a kind node
+
+### Usage
+* build docker images
+* start a kind cluster with `kind create cluster`
+* optionally forward localhost to docker engine host, if using remote docker engine
+* test install your charts using `ct`
