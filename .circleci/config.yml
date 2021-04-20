@@ -1,3 +1,5 @@
+# Required ENV variables
+# DOCKER_USER, DOCKER_PASS
 version: 2.1
 aliases:
   - &parameters
@@ -40,18 +42,19 @@ aliases:
         command: |
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker context create xbuilder
-          docker buildx create xbuilder --name xbuilder --use
+          docker buildx create xbuilder --name xbuilder --use --platform << parameters.platforms >>
           docker buildx inspect --bootstrap
     - run:
         name: Build images
         command: |
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin &> /dev/null || exit 1
           cd images
           for img in $(ls -1d *); do
             echo "Building << parameters.repo >>/$img:<< parameters.tag >> = << parameters.version >>"
             docker buildx build --progress plain --platform << parameters.platforms >> \
               --build-arg VERSION=<< parameters.version >> \
               --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
-              -t << parameters.repo >>/$img:<< parameters.tag >> ./$img/
+              --tag << parameters.repo >>/$img:<< parameters.tag >> --push ./$img/
           done
 
 jobs:
@@ -70,7 +73,10 @@ workflows:
   version: 2
   chart-test:
     jobs:
-      - build-latest
+      - build-latest:
+          matrix:
+            parameters:
+              platforms: ["linux/amd64","linux/arm64"]
       - build-20-dind:
           matrix:
             parameters:
