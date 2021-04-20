@@ -50,8 +50,7 @@ RUN curl -sSLo kind-${KIND_VERSION} "${KIND_URL}/download/v${KIND_VERSION}/kind-
     && chmod +x kind-${KIND_VERSION} \
     && mv kind-${KIND_VERSION} /usr/local/bin/kind
 
-RUN docker buildx version \
-    && kubectl version --client=true \
+RUN kubectl version --client=true \
     && helm version \
     && ct version \
     && kind version

@@ -1,3 +1,15 @@
+[![CircleCI](https://img.shields.io/circleci/build/github/DrPsychick/docker-ci-images)](https://app.circleci.com/pipelines/github/DrPsychick/docker-ci-images)
+[![license](https://img.shields.io/github/license/drpsychick/docker-ci-images.svg)](https://github.com/drpsychick/docker-ci-images/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/drpsychick/docker-ci-images.svg)](https://github.com/drpsychick/docker-ci-images)
+[![Contributors](https://img.shields.io/github/contributors/drpsychick/docker-ci-images.svg)](https://github.com/drpsychick/docker-ci-images/graphs/contributors)
+[![Paypal](https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FTXDN7LCDWUEA&source=url)
+[![GitHub Sponsor](https://img.shields.io/badge/github-sponsor-blue?logo=github)](https://github.com/sponsors/DrPsychick)
+
+[![GitHub issues](https://img.shields.io/github/issues/drpsychick/docker-ci-images.svg)](https://github.com/drpsychick/docker-ci-images/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/drpsychick/docker-ci-images.svg)](https://github.com/drpsychick/docker-ci-images/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/drpsychick/docker-ci-images.svg)](https://github.com/drpsychick/docker-ci-images/pulls)
+[![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/drpsychick/docker-ci-images.svg)](https://github.com/drpsychick/docker-ci-images/pulls?q=is%3Apr+is%3Aclosed)
+
 # Docker CI Images
 A collection of images that can be used in CI pipelines based on docker.
 
@@ -14,6 +26,10 @@ Included tools:
 * `git`, `curl`, `jq`
 
 ## Build multi-arch docker images
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx/tags) 
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/) 
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/) 
+
 Use `dind-buildx`:
 * based on `docker:dind`
 * includes `buildx` so you can build for multiple architectures
@@ -33,6 +49,10 @@ docker buildx inspect --bootstrap
 * Circle CI: https://github.com/DrPsychick/docker-influxdb/blob/master/.circleci/config.yml
 
 ## Build images and deploy with helm
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/tags) 
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/) 
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-helm/) 
+
 Use `dind-buildx-helm`:
 * based on `drpsychick/dind-buildx`
 * includes `kubectl` and `helm` so you can build your image and deploy with kubectl and/or helm
@@ -43,6 +63,10 @@ Same as above plus:
 * use `kubectl` and `helm` to deploy to your kubernetes cluster
 
 ## Build images, test helm charts and deploy to kind
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm-kind?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/tags) 
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/) 
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/) 
+
 Use `dind-buildx-helm-kind`:
 * based on `drpsychick/dind-buildx-helm`
 * includes `ct` and `kind` so you can test your helm chart and deploy it to a kind node
