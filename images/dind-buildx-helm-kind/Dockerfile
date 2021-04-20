@@ -20,7 +20,7 @@ RUN mkdir ct; cd ct; \
 ARG KIND_URL=https://github.com/kubernetes-sigs/kind/releases
 ARG KIND_VERSION=0.10.0
 ARG KIND_ARCH=${TARGETARCH}
-RUN curl -sSLo kind-${KIND_VERSION} "${KIND_URL}/download/${KIND_VERSION}/kind-linux-${KIND_ARCH}" \
+RUN curl -sSLo kind-${KIND_VERSION} "${KIND_URL}/download/v${KIND_VERSION}/kind-linux-${KIND_ARCH}" \
     && chmod +x kind-${KIND_VERSION} \
     && mv kind-${KIND_VERSION} /usr/local/bin/kind
 

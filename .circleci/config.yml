@@ -21,6 +21,12 @@ aliases:
     helm_version:
       default: 3.5.4
       type: string
+    ct_version:
+      default: 3.3.1
+      type: string
+    kind_version:
+      default: 0.10.0
+      type: string
     platforms:
       default: linux/amd64
       type: string
@@ -87,6 +93,8 @@ aliases:
                 --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
                 --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
                 --build-arg HELM_VERSION=<< parameters.helm_version >> \
+                --build-arg CT_VERSION=<< parameters.ct_version >> \
+                --build-arg KIND_VERSION=<< parameters.kind_version >> \
                 --tag << parameters.repo >>/$img:$TAG --push ./$img/
             fi
           done
