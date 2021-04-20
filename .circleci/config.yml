@@ -70,12 +70,16 @@ aliases:
                 --tag << parameters.repo >>/$img:<< parameters.tag >> --push ./$img/
             else
 
-              # determine tag version
+              # determine source version and target tag
               VERSION=<< parameters.version >>
               TAG=<< parameters.version >>-<< parameters.buildx_version >>
               if [ "$img" = "dind-buildx-helm" ]; then
                 VERSION=$VERSION-<< parameters.buildx_version >>
                 TAG=$TAG-<< parameters.kubectl_version >>-<< parameters.helm_version >>
+              fi
+              if [ "$img" = "dind-buildx-helm-kind" ]; then
+                VERSION=$VERSION-<< parameters.kubectl_version >>-<< parameters.helm_version >>
+                TAG=$TAG-<< parameters.kind_version >>
               fi
 
               docker buildx build --progress plain --platform << parameters.platforms >> \
