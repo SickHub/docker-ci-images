@@ -64,16 +64,24 @@ aliases:
           for img in $(ls -1d *); do
             echo "Building << parameters.repo >>/$img:<< parameters.tag >> = << parameters.version >>"
             if [ "latest" = "<< parameters.version >>" ]; then
+
               # use default ARGs of image
               docker buildx build --progress plain --platform << parameters.platforms >> \
                 --tag << parameters.repo >>/$img:<< parameters.tag >> --push ./$img/
             else
+
+              # determine tag version
+              TAG=<< parameters.version >>-<< parameters.buildx_version >>
+              if [ "$img" = "dind-buildx-helm" ]; then
+                TAG=$TAG-<< parameters.kubectl_version >>-<< parameters.helm_version >>
+              fi
+
               docker buildx build --progress plain --platform << parameters.platforms >> \
                 --build-arg VERSION=<< parameters.version >> \
                 --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
                 --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
                 --build-arg HELM_VERSION=<< parameters.helm_version >> \
-                --tag << parameters.repo >>/$img:<< parameters.tag >> --push ./$img/
+                --tag << parameters.repo >>/$img:$TAG --push ./$img/
             fi
           done
           docker image ls
@@ -106,4 +114,3 @@ workflows:
               buildx_version: ["0.5.0"]
               kubectl_version: ["1.20.0"]
               helm_version: ["3.5.0"]
-              tag: ["20-0.5.0-1.20.0-3.5.0"]
