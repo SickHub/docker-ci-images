@@ -2,7 +2,7 @@ ARG VERSION=latest
 FROM drpsychick/dind-buildx-helm:$VERSION
 
 RUN apk --no-cache add curl git py3-pip socat \
-    && pip3 install --upgrade pip
+    && pip3 install --upgrade pip \
     && pip3 install yamllint yamale
 
 ARG CT_URL=https://github.com/helm/chart-testing/releases
