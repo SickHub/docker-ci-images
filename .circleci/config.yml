@@ -6,6 +6,9 @@ aliases:
     version:
       default: latest
       type: string
+    buildx_url:
+      default: https://github.com/docker/buildx/releases
+      type: string
     buildx_version:
       default: 0.5.1
       type: string
