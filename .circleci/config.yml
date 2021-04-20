@@ -78,14 +78,17 @@ aliases:
 
               # determine source version and target tag
               VERSION=<< parameters.version >>
-              TAG=<< parameters.version >>-<< parameters.buildx_version >>
-              if [ "$img" = "dind-buildx-helm" ]; then
-                VERSION=$VERSION-<< parameters.buildx_version >>
-                TAG=$TAG-<< parameters.kubectl_version >>-<< parameters.helm_version >>
+              TAG=<< parameters.version >>
+              if [ "$img" = "dind-buildx-helm" -o "$img" = "dind-helm" ]; then
+                VERSION=<< parameters.version >>
+                TAG=<< parameters.kubectl_version >>
               fi
               if [ "$img" = "dind-buildx-helm-kind" ]; then
-                VERSION=$VERSION-<< parameters.buildx_version >>-<< parameters.kubectl_version >>-<< parameters.helm_version >>
-                TAG=$TAG-<< parameters.kubectl_version >>-<< parameters.helm_version >>-<< parameters.kind_version >>
+                VERSION=<< parameters.kubectl_version >>
+                TAG=<< parameters.kind_version >>
+              fi
+              if [ "$img" = "dind-helm-kind" ]; then
+                TAG=<< parameters.kind_version >>
               fi
 
               docker buildx build --progress plain --platform << parameters.platforms >> \
