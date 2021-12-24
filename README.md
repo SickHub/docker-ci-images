@@ -113,6 +113,8 @@ Same as above plus:
 * optionally forward localhost to docker engine host, if using remote docker engine
 * test install your charts using `ct`
 
+# Images for Kubernetes pipelines
+
 ## `drpsychick/argocd-kubectl`
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/argocd-kubectl?sort=date)](https://hub.docker.com/r/drpsychick/argocd-kubectl/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/argocd-kubectl.svg)](https://hub.docker.com/r/drpsychick/argocd-kubectl/)
@@ -120,7 +122,7 @@ Same as above plus:
 
 Add apps to ArgoCD running on your Kubernetes cluster
 * based on `bitnami/argo-cd`
-* includes `kubectl` and `kubeval` so you can validate your manifests
+* includes `kubectl`, `kubeval` and `kubeseal` so you can validate your manifests and encrypt your secrets for git
 
 ### Usage
 * use it as pipeline image to control ArgoCD: install/sync apps, change RBAC, add repos, ...

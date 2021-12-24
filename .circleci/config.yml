@@ -27,6 +27,9 @@ aliases:
     kubeval_version:
       default: latest
       type: string
+    kubeseal_version:
+      default: 0.17.1
+      type: string
     platforms:
       default: linux/amd64
       type: string
@@ -125,6 +128,7 @@ aliases:
               docker build --progress plain \
                 --build-arg VERSION=$VERSION \
                 --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
+                --build-arg KUBESEAL_VERSION=<< parameters.kubeseal_version >> \
                 --tag << parameters.repo >>/$img:$TAG ./$img/
               docker push << parameters.repo >>/$img:$TAG
             fi
@@ -171,6 +175,7 @@ workflows:
               version: ["latest", "2", "2.2.1"]
               kubectl_version: ["stable"]
               kubeval_version: ["latest"]
+              kubeseal_version: ["0.17.1"]
 
   # build 'latest' weekly
   weekly:
