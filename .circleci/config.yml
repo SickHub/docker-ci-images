@@ -24,6 +24,9 @@ aliases:
     kind_version:
       default: 0.10.0
       type: string
+    kubeval_version:
+      default: latest
+      type: string
     platforms:
       default: linux/amd64
       type: string
@@ -35,7 +38,7 @@ aliases:
       type: string
   - &docker-dind
     - image: docker:dind
-  - &build
+  - &buildx
     - checkout
     - setup_remote_docker:
         version: 20.10.2
@@ -94,22 +97,59 @@ aliases:
             fi
           done
 
+  - &build86
+    - checkout
+    - setup_remote_docker:
+        version: 20.10.2
+    - run:
+        # plain docker build x86 without cross-platform
+        name: Build images
+        command: |
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin &> /dev/null || exit 1
+          cd images_x86
+          for img in $(ls -1d *); do
+            if [ "latest" = "<< parameters.version >>" ]; then
+
+              # use default ARGs of image
+              echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
+              docker build --progress plain \
+                --tag << parameters.repo >>/$img:<< parameters.tag >> ./$img/
+              docker push << parameters.repo >>/$img:<< parameters.tag >>
+            else
+
+              # determine source version and target tag
+              VERSION=<< parameters.version >>
+              TAG=<< parameters.version >>
+
+              echo "Building << parameters.repo >>/$img:$TAG based on $VERSION"
+              docker build --progress plain \
+                --build-arg VERSION=$VERSION \
+                --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
+                --tag << parameters.repo >>/$img:$TAG ./$img/
+              docker push << parameters.repo >>/$img:$TAG
+            fi
+          done
 jobs:
-  build:
+  buildx:
     parameters: *parameters
     docker: *docker-dind
     resource_class: small
-    steps: *build
+    steps: *buildx
+  build86:
+    parameters: *parameters
+    docker: *docker-dind
+    resource_class: small
+    steps: *build86
 
 workflows:
   version: 2
   build-images:
     jobs:
-      - build:
+      - buildx:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
-      - build:
+      - buildx:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
@@ -117,7 +157,7 @@ workflows:
               kubectl_version: ["1.20.4"]
               helm_version: ["3.5.0"]
               kind_version: [ "0.10.0" ]
-      - build:
+      - buildx:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
@@ -125,6 +165,13 @@ workflows:
               kubectl_version: ["1.19.4"]
               helm_version: ["3.4.2"]
               kind_version: ["0.9.0"]
+      - build86:
+          matrix:
+            parameters:
+              version: ["latest", "2", "2.2.1"]
+              kubectl_version: ["stable"]
+              kubeval_version: ["latest"]
+
   # build 'latest' weekly
   weekly:
     triggers:
@@ -136,7 +183,7 @@ workflows:
               only:
                 - master
     jobs:
-      - build:
+      - buildx:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
@@ -151,7 +198,7 @@ workflows:
               only:
                 - master
     jobs:
-      - build:
+      - buildx:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
@@ -159,7 +206,7 @@ workflows:
               kubectl_version: ["1.20.4"]
               helm_version: ["3.5.0"]
               kind_version: [ "0.10.0" ]
-      - build:
+      - buildx:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
