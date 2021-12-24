@@ -46,5 +46,3 @@ ARG KUBESEAL_VERSION=0.17.1
 RUN curl -sL https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL_VERSION}/kubeseal-${KUBESEAL_VERSION}-linux-amd64.tar.gz -o kubeseal.tgz \
     && tar xzf kubeseal.tgz kubeseal && rm kubeseal.tgz \
     && chmod +x kubeseal && mv kubeseal /usr/local/bin
-
-USER 1001
