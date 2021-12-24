@@ -113,7 +113,8 @@ aliases:
               # use default ARGs of image
               echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
               docker build --progress plain \
-                --tag << parameters.repo >>/$img:<< parameters.tag >> --push ./$img/
+                --tag << parameters.repo >>/$img:<< parameters.tag >> ./$img/
+              docker push << parameters.repo >>/$img:<< parameters.tag >>
             else
 
               # determine source version and target tag
@@ -121,10 +122,11 @@ aliases:
               TAG=<< parameters.argocd_version >>
 
               echo "Building << parameters.repo >>/$img:$TAG based on $VERSION"
-              docker  build --progress plain \
+              docker build --progress plain \
                 --build-arg ARGOCD_VERSION=$ARGOCD_VERSION \
                 --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
-                --tag << parameters.repo >>/$img:$TAG --push ./$img/
+                --tag << parameters.repo >>/$img:$TAG ./$img/
+              docker push << parameters.repo >>/$img:$TAG
             fi
           done
 jobs:
