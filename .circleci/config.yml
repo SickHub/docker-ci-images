@@ -24,6 +24,9 @@ aliases:
     kind_version:
       default: 0.10.0
       type: string
+    argocd_version:
+      default: latest
+      type: string
     platforms:
       default: linux/amd64
       type: string
