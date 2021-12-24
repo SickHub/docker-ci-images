@@ -38,8 +38,6 @@ aliases:
       type: string
   - &docker-dind
     - image: docker:dind
-  - &docker
-    - image: docker
   - &buildx
     - checkout
     - setup_remote_docker:
@@ -101,6 +99,8 @@ aliases:
 
   - &build86
     - checkout
+    - setup_remote_docker:
+      version: 20.10.2
     - run:
         # plain docker build x86 without cross-platform
         name: Build images
@@ -137,7 +137,7 @@ jobs:
     steps: *buildx
   build86:
     parameters: *parameters
-    docker: *docker
+    docker: *docker-dind
     resource_class: small
     steps: *build86
 
