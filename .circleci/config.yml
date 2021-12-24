@@ -24,6 +24,12 @@ aliases:
     kind_version:
       default: 0.10.0
       type: string
+    argocd_version:
+      default: 2.1.7
+      type: string
+    kustomize_version:
+      default: 4.4.1
+      type: string
     kubeval_version:
       default: latest
       type: string
@@ -127,7 +133,10 @@ aliases:
               echo "Building << parameters.repo >>/$img:$TAG based on $VERSION"
               docker build --progress plain \
                 --build-arg VERSION=$VERSION \
+                --build-arg ARGOCD_VERSION=<< parameters.argocd_version >> \
+                --build-arg HELM_VERSION=<< parameters.helm_version >> \
                 --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
+                --build-arg KUSTOMIZE_VERSION=<< parameters.kustomize_version >> \
                 --build-arg KUBESEAL_VERSION=<< parameters.kubeseal_version >> \
                 --tag << parameters.repo >>/$img:$TAG ./$img/
               docker push << parameters.repo >>/$img:$TAG
@@ -172,8 +181,11 @@ workflows:
       - build86:
           matrix:
             parameters:
-              version: ["latest", "2", "2.2.1"]
+              version: ["latest", "3"]
+              argocd_version: ["2.1.7"]
+              helm_version: ["3.5.0"]
               kubectl_version: ["stable"]
+              kustomize_version: [ "4.4.1" ]
               kubeval_version: ["latest"]
               kubeseal_version: ["0.17.1"]
 
@@ -192,6 +204,17 @@ workflows:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
+      - build86:
+          matrix:
+            parameters:
+              version: ["latest"]
+              argocd_version: [ "2.1.7" ]
+              helm_version: [ "3.5.0" ]
+              kubectl_version: [ "stable" ]
+              kustomize_version: ["4.4.1"]
+              kubeval_version: [ "latest" ]
+              kubeseal_version: [ "0.17.1" ]
+
   # build other tags monthly
   monthly:
     triggers:
