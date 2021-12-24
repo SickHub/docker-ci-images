@@ -24,6 +24,9 @@ aliases:
     kind_version:
       default: 0.10.0
       type: string
+    kubeval_version:
+      default: latest
+      type: string
     platforms:
       default: linux/amd64
       type: string
@@ -166,7 +169,8 @@ workflows:
           matrix:
             parameters:
               version: ["latest", "2", "2.2.1"]
-              kubectl_version: ["stable", "1.23.1", "1.20.4"]
+              kubectl_version: ["stable"]
+              kubeval_version: ["latest"]
 
   # build 'latest' weekly
   weekly:
