@@ -1,6 +1,6 @@
 # TODO: consider plain alpine/kubectl base and install only argo-cd cli (smaller image)
-ARG ARGOCD_VERSION=latest
-FROM bitnami/argo-cd:$ARGOCD_VERSION
+ARG VERSION=latest
+FROM bitnami/argo-cd:$VERSION
 
 USER root
 RUN apt update && apt install -y ca-certificates jq

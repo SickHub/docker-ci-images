@@ -112,3 +112,15 @@ Same as above plus:
 * start a kind cluster with `kind create cluster`
 * optionally forward localhost to docker engine host, if using remote docker engine
 * test install your charts using `ct`
+
+## `drpsychick/argocd-kubectl`
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/argocd-kubectl?sort=date)](https://hub.docker.com/r/drpsychick/argocd-kubectl/tags)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/argocd-kubectl.svg)](https://hub.docker.com/r/drpsychick/argocd-kubectl/)
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/argocd-kubectl.svg)](https://hub.docker.com/r/drpsychick/argocd-kubectl/)
+
+Add apps to ArgoCD running on your Kubernetes cluster
+* based on `bitnami/argo-cd`
+* includes `kubectl` and `kubeval` so you can validate your manifests
+
+### Usage
+* use it as pipeline image to control ArgoCD: install/sync apps, change RBAC, add repos, ...

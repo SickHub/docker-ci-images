@@ -24,9 +24,6 @@ aliases:
     kind_version:
       default: 0.10.0
       type: string
-    argocd_version:
-      default: latest
-      type: string
     platforms:
       default: linux/amd64
       type: string
@@ -118,12 +115,12 @@ aliases:
             else
 
               # determine source version and target tag
-              VERSION=<< parameters.argocd_version >>
-              TAG=<< parameters.argocd_version >>
+              VERSION=<< parameters.version >>
+              TAG=<< parameters.version >>
 
               echo "Building << parameters.repo >>/$img:$TAG based on $VERSION"
               docker build --progress plain \
-                --build-arg ARGOCD_VERSION=$ARGOCD_VERSION \
+                --build-arg VERSION=$VERSION \
                 --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
                 --tag << parameters.repo >>/$img:$TAG ./$img/
               docker push << parameters.repo >>/$img:$TAG
@@ -168,7 +165,7 @@ workflows:
       - build86:
           matrix:
             parameters:
-              argocd_version: ["latest", "2", "2.2.1"]
+              version: ["latest", "2", "2.2.1"]
               kubectl_version: ["stable", "1.23.1", "1.20.4"]
 
   # build 'latest' weekly
