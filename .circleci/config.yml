@@ -79,6 +79,14 @@ aliases:
               # use default ARGs of image
               echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
               docker buildx build --progress plain --platform << parameters.platforms >> \
+                --build-arg VERSION=<< parameters.version >> \
+                --build-arg BUILDX_VERSION=<< parameters.buildx_version >> \
+                --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
+                --build-arg HELM_VERSION=<< parameters.helm_version >> \
+                --build-arg CT_VERSION=<< parameters.ct_version >> \
+                --build-arg KIND_VERSION=<< parameters.kind_version >> \
+                --build-arg KUSTOMIZE_VERSION=<< parameters.kustomize_version >> \
+                --build-arg KUBESEAL_VERSION=<< parameters.kubeseal_version >> \
                 --tag << parameters.repo >>/$img:<< parameters.tag >> --push ./$img/
             else
 
@@ -102,6 +110,8 @@ aliases:
                 --build-arg HELM_VERSION=<< parameters.helm_version >> \
                 --build-arg CT_VERSION=<< parameters.ct_version >> \
                 --build-arg KIND_VERSION=<< parameters.kind_version >> \
+                --build-arg KUSTOMIZE_VERSION=<< parameters.kustomize_version >> \
+                --build-arg KUBESEAL_VERSION=<< parameters.kubeseal_version >> \
                 --tag << parameters.repo >>/$img:$TAG --push ./$img/
             fi
           done
