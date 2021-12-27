@@ -185,7 +185,7 @@ workflows:
       - build86:
           matrix:
             parameters:
-              version: ["latest", "3"]
+              version: ["3"]
               argocd_version: ["2.1.7"]
               helm_version: ["3.5.0"]
               kubectl_version: ["stable"]
