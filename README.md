@@ -27,7 +27,7 @@ Included tools:
 
 # Images with `buildx`
 
-## `drpsychick/dind-buildx`
+## [drpsychick/dind-buildx](./images/dind-buildx)
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/)
@@ -50,7 +50,7 @@ docker buildx inspect --bootstrap
 ### Examples
 * Circle CI: https://github.com/DrPsychick/docker-influxdb/blob/master/.circleci/config.yml
   
-## `drpsychick/dind-buildx-helm`
+## [drpsychick/dind-buildx-helm](./images/dind-buildx-helm)
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-helm/)
@@ -64,7 +64,7 @@ Same as above plus:
 * provide kubernetes config and point to it with `$KUBECONFIG`
 * use `kubectl` and `helm` to deploy to your kubernetes cluster
 
-## `drpsychick/dind-buildx-helm-kind`
+## [drpsychick/dind-buildx-helm-kind](./images/dind-buildx-helm-kind)
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm-kind?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/)
@@ -84,7 +84,7 @@ Same as above plus:
 
 # Images without `buildx`
 
-## `drpsychick/dind-helm`
+## [drpsychick/dind-helm](./images/dind-helm)
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-helm?sort=date)](https://hub.docker.com/r/drpsychick/dind-helm/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-helm.svg)](https://hub.docker.com/r/drpsychick/dind-helm/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-helm.svg)](https://hub.docker.com/r/drpsychick/dind-helm/)
@@ -98,7 +98,7 @@ Same as above plus:
 * provide kubernetes config and point to it with `$KUBECONFIG`
 * use `kubectl` and `helm` to deploy to your kubernetes cluster
 
-## `drpsychick/dind-helm-kind`
+## [drpsychick/dind-helm-kind](./images/dind-helm-kind)
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-helm-kind?sort=date)](https://hub.docker.com/r/drpsychick/dind-helm-kind/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-helm-kind/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-helm-kind/)
@@ -115,7 +115,7 @@ Same as above plus:
 
 # Images for Kubernetes pipelines
 
-## `drpsychick/argocd-kubectl`
+## [drpsychick/argocd-kubectl](./images_x86/argocd-kubectl)
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/argocd-kubectl?sort=date)](https://hub.docker.com/r/drpsychick/argocd-kubectl/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/argocd-kubectl.svg)](https://hub.docker.com/r/drpsychick/argocd-kubectl/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/argocd-kubectl.svg)](https://hub.docker.com/r/drpsychick/argocd-kubectl/)
@@ -123,6 +123,9 @@ Same as above plus:
 Add apps to ArgoCD running on your Kubernetes cluster
 * based on `bitnami/argo-cd`
 * includes `kubectl`, `kubeval` and `kubeseal` so you can validate your manifests and encrypt your secrets for git
+* includes `helm`, `kustomize`, `ct` so you can generate manifests and test your helm chart
 
 ### Usage
 * use it as pipeline image to control ArgoCD: install/sync apps, change RBAC, add repos, ...
+* template charts with `helm` and lint your charts using `ct`
+* `kustomize` for environments and validate your manifests with `kubeval`
