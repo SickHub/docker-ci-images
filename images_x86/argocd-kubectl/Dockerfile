@@ -4,13 +4,13 @@ FROM alpine:$VERSION
 RUN apk add --update --no-cache ca-certificates git curl jq
 
 # argocd
-ARG ARGOCD_VERSION=2.1.7
+ARG ARGOCD_VERSION=2.2.1
 RUN curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/download/v$ARGOCD_VERSION/argocd-linux-amd64 \
     && chmod +x argocd && mv argocd /usr/local/bin
 
 # install helm: https://github.com/helm/helm/releases
 ARG HELM_URL=https://get.helm.sh
-ARG HELM_VERSION=3.5.4
+ARG HELM_VERSION=3.8.0
 ARG HELM_ARCH=amd64
 
 RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
@@ -19,6 +19,20 @@ RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
     && mv linux-${HELM_ARCH}/helm /usr/bin/helm \
     && chmod +x /usr/bin/helm \
     && rm -rf linux-${HELM_ARCH}
+
+ARG CT_URL=https://github.com/helm/chart-testing/releases
+ARG CT_VERSION=3.5.0
+ARG TARGETARCH
+ARG CT_ARCH=${TARGETARCH}
+
+RUN if [ -z "$CT_ARCH" ]; then CT_ARCH=amd64; fi; \
+    mkdir ct; cd ct; \
+    curl -sSLo ct-${CT_VERSION}.tgz "${CT_URL}/download/v${CT_VERSION}/chart-testing_${CT_VERSION}_linux_${CT_ARCH}.tar.gz" \
+    && tar -xzf ct-${CT_VERSION}.tgz \
+    && chmod +x ct \
+    && mv -v ct /usr/local/bin/ct \
+    && mkdir -p /etc/ct && mv -v etc/* /etc/ct/ \
+    && cd .. && rm -rf ct
 
 ARG KUBECTL_VERSION=stable
 RUN if [ "stable" = $KUBECTL_VERSION ]; then \
@@ -42,7 +56,7 @@ RUN if [ "latest" = $KUBEVAL_VERSION ]; then \
     && tar xzf kubeval-linux-amd64.tar.gz kubeval && rm kubeval-linux-amd64.tar.gz \
     && chmod +x kubeval && mv kubeval /usr/local/bin
 
-ARG KUBESEAL_VERSION=0.17.1
+ARG KUBESEAL_VERSION=0.17.3
 RUN curl -sL https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL_VERSION}/kubeseal-${KUBESEAL_VERSION}-linux-amd64.tar.gz -o kubeseal.tgz \
     && tar xzf kubeseal.tgz kubeseal && rm kubeseal.tgz \
     && chmod +x kubeseal && mv kubeseal /usr/local/bin

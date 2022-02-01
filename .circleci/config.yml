@@ -19,7 +19,7 @@ aliases:
       default: 3.7.2
       type: string
     ct_version:
-      default: 3.4.0
+      default: 3.5.0
       type: string
     kind_version:
       default: 0.11.1
@@ -144,6 +144,7 @@ aliases:
                 --build-arg VERSION=$VERSION \
                 --build-arg ARGOCD_VERSION=<< parameters.argocd_version >> \
                 --build-arg HELM_VERSION=<< parameters.helm_version >> \
+                --build-arg CT_VERSION=<< parameters.ct_version >> \
                 --build-arg KUBECTL_VERSION=<< parameters.kubectl_version >> \
                 --build-arg KUSTOMIZE_VERSION=<< parameters.kustomize_version >> \
                 --build-arg KUBESEAL_VERSION=<< parameters.kubeseal_version >> \
