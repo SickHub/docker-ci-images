@@ -5,7 +5,7 @@ RUN apk add --update --no-cache py3-pip socat \
     && pip3 install yamllint yamale
 
 ARG CT_URL=https://github.com/helm/chart-testing/releases
-ARG CT_VERSION=3.3.1
+ARG CT_VERSION=3.5.1
 ARG TARGETARCH
 ARG CT_ARCH=${TARGETARCH}
 
@@ -19,7 +19,7 @@ RUN if [ -z "$CT_ARCH" ]; then CT_ARCH=amd64; fi; \
     && cd .. && rm -rf ct
 
 ARG KIND_URL=https://github.com/kubernetes-sigs/kind/releases
-ARG KIND_VERSION=0.10.0
+ARG KIND_VERSION=0.12.0
 ARG KIND_ARCH=${TARGETARCH}
 
 RUN if [ -z "$KIND_ARCH" ]; then KIND_ARCH=amd64; fi; \

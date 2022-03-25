@@ -5,7 +5,7 @@ RUN apk add --update --no-cache ca-certificates git curl jq
 
 # install kubectl: https://github.com/kubernetes/kubectl/releases
 ARG KUBECTL_URL=https://dl.k8s.io/release
-ARG KUBECTL_VERSION=1.21.0
+ARG KUBECTL_VERSION=1.23.1
 ARG TARGETARCH
 ARG KUBECTL_ARCH=${TARGETARCH}
 
@@ -21,7 +21,7 @@ RUN if [ -z "$KUBECTL_ARCH" ]; then KUBECTL_ARCH=amd64; fi; \
 
 # install helm: https://github.com/helm/helm/releases
 ARG HELM_URL=https://get.helm.sh
-ARG HELM_VERSION=3.5.4
+ARG HELM_VERSION=3.8.1
 ARG HELM_ARCH=${TARGETARCH}
 
 RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
