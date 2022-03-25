@@ -5,13 +5,13 @@ RUN apk add --update --no-cache ca-certificates git curl jq py3-pip socat \
     && pip3 install yamllint yamale
 
 # argocd
-ARG ARGOCD_VERSION=2.2.1
+ARG ARGOCD_VERSION=2.3.2
 RUN curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/download/v$ARGOCD_VERSION/argocd-linux-amd64 \
     && chmod +x argocd && mv argocd /usr/local/bin
 
 # install helm: https://github.com/helm/helm/releases
 ARG HELM_URL=https://get.helm.sh
-ARG HELM_VERSION=3.8.0
+ARG HELM_VERSION=3.8.1
 ARG HELM_ARCH=amd64
 
 RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
@@ -22,7 +22,7 @@ RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
     && rm -rf linux-${HELM_ARCH}
 
 ARG CT_URL=https://github.com/helm/chart-testing/releases
-ARG CT_VERSION=3.5.0
+ARG CT_VERSION=3.5.1
 ARG TARGETARCH
 ARG CT_ARCH=${TARGETARCH}
 
@@ -42,7 +42,7 @@ RUN if [ "stable" = $KUBECTL_VERSION ]; then \
     && curl -sLO https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
     && chmod +x kubectl && mv kubectl /usr/local/bin
 
-ARG KUSTOMIZE_VERSION=4.4.1
+ARG KUSTOMIZE_VERSION=4.5.3
 RUN curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz -o kustomize_linux_amd64.tar.gz \
     && tar xvzf kustomize_linux_amd64.tar.gz kustomize && rm kustomize_linux_amd64.tar.gz \
     && chmod +x kustomize && mv kustomize /usr/local/bin
