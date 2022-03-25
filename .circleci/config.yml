@@ -28,7 +28,7 @@ aliases:
       default: 2.3.0
       type: string
     kustomize_version:
-      default: 4.5.2
+      default: 4.5.3
       type: string
     kubeval_version:
       default: 0.16.1
