@@ -31,6 +31,7 @@ Included tools:
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx.svg)](https://hub.docker.com/r/drpsychick/dind-buildx/)
+![architectures](https://img.shields.io/badge/arch-amd64,arm64-green)
 
 Build multi-arch docker images
 * based on `docker:dind`
@@ -54,6 +55,7 @@ docker buildx inspect --bootstrap
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-helm/)
+![architectures](https://img.shields.io/badge/arch-amd64,arm64-green)
 
 Build images and deploy with helm
 * based on `drpsychick/dind-buildx`
@@ -68,6 +70,7 @@ Same as above plus:
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-buildx-helm-kind?sort=date)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-buildx-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-buildx-helm-kind/)
+![architectures](https://img.shields.io/badge/arch-amd64,arm64-green)
 
 Build images, test helm charts and deploy to kind
 * based on `drpsychick/dind-buildx-helm`
@@ -88,6 +91,7 @@ Same as above plus:
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-helm?sort=date)](https://hub.docker.com/r/drpsychick/dind-helm/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-helm.svg)](https://hub.docker.com/r/drpsychick/dind-helm/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-helm.svg)](https://hub.docker.com/r/drpsychick/dind-helm/)
+![architectures](https://img.shields.io/badge/arch-amd64,arm64-green)
 
 Build images and deploy with helm (without `buildx`)
 * based on `docker:dind`
@@ -102,6 +106,7 @@ Same as above plus:
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/dind-helm-kind?sort=date)](https://hub.docker.com/r/drpsychick/dind-helm-kind/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/dind-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-helm-kind/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/dind-helm-kind.svg)](https://hub.docker.com/r/drpsychick/dind-helm-kind/)
+![architectures](https://img.shields.io/badge/arch-amd64,arm64-green)
 
 Build images, test helm charts and deploy to kind (without `buildx`)
 * based on `drpsychick/dind-helm`
@@ -119,6 +124,7 @@ Same as above plus:
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/argocd-kubectl?sort=date)](https://hub.docker.com/r/drpsychick/argocd-kubectl/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/argocd-kubectl.svg)](https://hub.docker.com/r/drpsychick/argocd-kubectl/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/argocd-kubectl.svg)](https://hub.docker.com/r/drpsychick/argocd-kubectl/)
+![architectures](https://img.shields.io/badge/arch-amd64-green)
 
 Add apps to ArgoCD running on your Kubernetes cluster
 * based on `bitnami/argo-cd`
