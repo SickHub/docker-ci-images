@@ -10,13 +10,13 @@ aliases:
       default: https://github.com/docker/buildx/releases
       type: string
     buildx_version:
-      default: 0.8.1
+      default: 0.8.2
       type: string
     kubectl_version:
       default: 1.23.1
       type: string
     helm_version:
-      default: 3.8.1
+      default: 3.8.2
       type: string
     ct_version:
       default: 3.5.1
@@ -25,10 +25,10 @@ aliases:
       default: 0.12.0
       type: string
     argocd_version:
-      default: 2.3.2
+      default: 2.3.3
       type: string
     kustomize_version:
-      default: 4.5.3
+      default: 4.5.4
       type: string
     kubeval_version:
       default: 0.16.1
