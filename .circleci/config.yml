@@ -16,16 +16,16 @@ aliases:
       default: 1.23.1
       type: string
     helm_version:
-      default: 3.8.2
+      default: 3.9.0
       type: string
     ct_version:
       default: 3.5.1
       type: string
     kind_version:
-      default: 0.12.0
+      default: 0.14.0
       type: string
     argocd_version:
-      default: 2.3.3
+      default: 2.3.4
       type: string
     kustomize_version:
       default: 4.5.4
@@ -34,7 +34,7 @@ aliases:
       default: 0.16.1
       type: string
     kubeseal_version:
-      default: 0.17.1
+      default: 0.17.5
       type: string
     platforms:
       default: linux/amd64
