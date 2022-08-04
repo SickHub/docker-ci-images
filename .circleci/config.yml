@@ -13,28 +13,28 @@ aliases:
       default: 0.8.2
       type: string
     kubectl_version:
-      default: 1.23.1
+      default: 1.24.3
       type: string
     helm_version:
-      default: 3.9.0
+      default: 3.9.2
       type: string
     ct_version:
-      default: 3.5.1
+      default: 3.7.0
       type: string
     kind_version:
       default: 0.14.0
       type: string
     argocd_version:
-      default: 2.3.4
+      default: 2.4.8
       type: string
     kustomize_version:
-      default: 4.5.4
+      default: 4.5.7
       type: string
     kubeval_version:
       default: 0.16.1
       type: string
     kubeseal_version:
-      default: 0.17.5
+      default: 0.18.1
       type: string
     platforms:
       default: linux/amd64
