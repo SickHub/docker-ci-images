@@ -4,7 +4,7 @@ FROM drpsychick/dind-buildx:$VERSION
 # install kubectl: https://github.com/kubernetes/kubectl/releases
 ARG KUBECTL_URL=https://dl.k8s.io/release
 # github-releases:kubernetes/kubernetes
-ARG KUBECTL_VERSION=v1.23.1
+ARG KUBECTL_VERSION=v1.25.0
 ARG TARGETARCH
 ARG KUBECTL_ARCH=${TARGETARCH}
 
