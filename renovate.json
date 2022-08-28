@@ -8,7 +8,7 @@
     {
       "fileMatch": [
         "^.circleci/config.yml$",
-        "^Dockerfile$"
+        "^images.*/.*/Dockerfile$"
       ],
       "matchStrings": [
         "\\sdefault: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>.*?)\\n",
