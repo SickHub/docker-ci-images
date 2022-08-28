@@ -5,13 +5,14 @@ RUN apk add --update --no-cache ca-certificates git curl jq
 
 # install kubectl: https://github.com/kubernetes/kubectl/releases
 ARG KUBECTL_URL=https://dl.k8s.io/release
-ARG KUBECTL_VERSION=1.23.1
+# github-releases:kubernetes/kubernetes
+ARG KUBECTL_VERSION=v1.23.1
 ARG TARGETARCH
 ARG KUBECTL_ARCH=${TARGETARCH}
 
 RUN if [ -z "$KUBECTL_ARCH" ]; then KUBECTL_ARCH=amd64; fi; \
-    URL="${KUBECTL_URL}/v${KUBECTL_VERSION}/bin/linux/${KUBECTL_ARCH}/kubectl"; \
-    CHECKSUM_URL="${KUBECTL_URL}/v${KUBECTL_VERSION}/bin/linux/${KUBECTL_ARCH}/kubectl.sha256"; \
+    URL="${KUBECTL_URL}/${KUBECTL_VERSION}/bin/linux/${KUBECTL_ARCH}/kubectl"; \
+    CHECKSUM_URL="${KUBECTL_URL}/${KUBECTL_VERSION}/bin/linux/${KUBECTL_ARCH}/kubectl.sha256"; \
     curl -sSL -o kubectl-sha256 "${CHECKSUM_URL}" \
     && curl -sSL -o kubectl-${KUBECTL_VERSION} "${URL}" \
     && test "$(cat kubectl-sha256 | awk '{print $1}')" = "$(cat kubectl-${KUBECTL_VERSION} | sha256sum | awk '{print $1}')" \
@@ -21,11 +22,12 @@ RUN if [ -z "$KUBECTL_ARCH" ]; then KUBECTL_ARCH=amd64; fi; \
 
 # install helm: https://github.com/helm/helm/releases
 ARG HELM_URL=https://get.helm.sh
-ARG HELM_VERSION=3.8.1
+# github-releases:helm/helm
+ARG HELM_VERSION=v3.8.1
 ARG HELM_ARCH=${TARGETARCH}
 
 RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
-    TAR_FILE="helm-v${HELM_VERSION}-linux-${HELM_ARCH}.tar.gz"; \
+    TAR_FILE="helm-${HELM_VERSION}-linux-${HELM_ARCH}.tar.gz"; \
     curl -sSL ${HELM_URL}/${TAR_FILE} | tar xz \
     && mv linux-${HELM_ARCH}/helm /usr/bin/helm \
     && chmod +x /usr/bin/helm \
