@@ -10,31 +10,31 @@ aliases:
       default: https://github.com/docker/buildx/releases
       type: string
     buildx_version:
-      default: 0.9.1
+      default: v0.8.2 # github-releases:docker/buildx
       type: string
     kubectl_version:
-      default: 1.24.3
+      default: v1.24.3 # github-releases:kubernetes/kubernetes
       type: string
     helm_version:
-      default: 3.9.2
+      default: v3.9.2 # github-releases:helm/helm
       type: string
     ct_version:
-      default: 3.7.0
+      default: v3.7.0 # github-releases:helm/chart-testing
       type: string
     kind_version:
-      default: 0.14.0
+      default: v0.14.0 # github-releases:kubernetes-sigs/kind
       type: string
     argocd_version:
-      default: 2.4.8
+      default: v2.4.8 # github-releases:argoproj/argo-cd
       type: string
     kustomize_version:
-      default: 4.5.7
+      default: v4.5.7 # github-releases:kubernetes-sigs/kustomize/kustomize/
       type: string
     kubeval_version:
-      default: 0.16.1
+      default: v0.16.1 # github-releases:instrumenta/kubeval
       type: string
     kubeseal_version:
-      default: 0.18.1
+      default: v0.18.1 # github-releases:bitnami-labs/sealed-secrets
       type: string
     platforms:
       default: linux/amd64
@@ -56,8 +56,8 @@ aliases:
         command: |
           apk add --no-cache curl
           mkdir -p ~/.docker/cli-plugins
-          fileName="buildx-v<< parameters.buildx_version >>.linux-amd64"
-          url="<< parameters.buildx_url >>/download/v<< parameters.buildx_version >>/${fileName}"
+          fileName="buildx-<< parameters.buildx_version >>.linux-amd64"
+          url="<< parameters.buildx_url >>/download/<< parameters.buildx_version >>/${fileName}"
           curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
           chmod a+x ~/.docker/cli-plugins/docker-buildx
           docker buildx install
@@ -177,17 +177,17 @@ workflows:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
               version: ["20-dind"]
-              kubectl_version: ["1.20.4"]
-              helm_version: ["3.5.0"]
-              kind_version: [ "0.10.0" ]
+              kubectl_version: ["v1.20.4"]
+              helm_version: ["v3.5.0"]
+              kind_version: [ "v0.10.0" ]
       - buildx:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
               version: ["19-dind"]
-              kubectl_version: ["1.19.4"]
-              helm_version: ["3.4.2"]
-              kind_version: ["0.9.0"]
+              kubectl_version: ["v1.19.4"]
+              helm_version: ["v3.4.2"]
+              kind_version: ["v0.9.0"]
       - build86:
           matrix:
             parameters:
@@ -196,12 +196,12 @@ workflows:
           matrix:
             parameters:
               version: ["3"]
-              argocd_version: ["2.1.7"]
-              helm_version: ["3.5.0"]
+              argocd_version: ["v2.1.7"]
+              helm_version: ["v3.5.0"]
               kubectl_version: ["stable"]
-              kustomize_version: [ "4.4.1" ]
+              kustomize_version: [ "v4.4.1" ]
               kubeval_version: ["latest"]
-              kubeseal_version: ["0.17.1"]
+              kubeseal_version: ["v0.17.1"]
 
   # build 'latest' weekly
   weekly:
@@ -222,12 +222,12 @@ workflows:
           matrix:
             parameters:
               version: ["latest"]
-              argocd_version: [ "2.1.7" ]
-              helm_version: [ "3.5.0" ]
+              argocd_version: [ "v2.1.7" ]
+              helm_version: [ "v3.5.0" ]
               kubectl_version: [ "stable" ]
-              kustomize_version: ["4.4.1"]
+              kustomize_version: ["v4.4.1"]
               kubeval_version: [ "latest" ]
-              kubeseal_version: [ "0.17.1" ]
+              kubeseal_version: [ "v0.17.1" ]
 
   # build other tags monthly
   monthly:
@@ -245,14 +245,14 @@ workflows:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
               version: ["20-dind"]
-              kubectl_version: ["1.20.4"]
-              helm_version: ["3.5.0"]
-              kind_version: [ "0.10.0" ]
+              kubectl_version: ["v1.20.4"]
+              helm_version: ["v3.5.0"]
+              kind_version: [ "v0.10.0" ]
       - buildx:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
               version: ["19-dind"]
-              kubectl_version: ["1.19.4"]
-              helm_version: ["3.4.2"]
-              kind_version: ["0.9.0"]
+              kubectl_version: ["v1.19.4"]
+              helm_version: ["v3.4.2"]
+              kind_version: ["v0.9.0"]
