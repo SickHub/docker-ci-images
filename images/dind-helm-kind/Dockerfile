@@ -13,7 +13,7 @@ ARG CT_ARCH=${TARGETARCH}
 RUN if [ -z "$CT_ARCH" ]; then CT_ARCH=amd64; fi; \
     mkdir ct; cd ct; \
     export version=$(echo "${CT_VERSION}" | tr -d v); \
-    curl -sSLo ct-${CT_VERSION}.tgz "${CT_URL}/download/v${version}/chart-testing_${version}_linux_${CT_ARCH}.tar.gz" \
+    curl -sSLo ct-${CT_VERSION}.tgz "${CT_URL}/download/${CT_VERSION}/chart-testing_${version}_linux_${CT_ARCH}.tar.gz" \
     && tar -xzf ct-${CT_VERSION}.tgz \
     && chmod +x ct \
     && mv -v ct /usr/local/bin/ct \
