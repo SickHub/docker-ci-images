@@ -19,7 +19,7 @@ aliases:
       default: v3.10.0 # github-releases:helm/helm
       type: string
     ct_version:
-      default: v3.7.0 # github-releases:helm/chart-testing
+      default: v3.7.1 # github-releases:helm/chart-testing
       type: string
     kind_version:
       default: v0.16.0 # github-releases:kubernetes-sigs/kind
