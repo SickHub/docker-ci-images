@@ -1,0 +1,7 @@
+ansible-core
+ansible-base
+#ansible-lint
+#ansible-lint-junit
+ansible-compat
+ansible
+cryptography

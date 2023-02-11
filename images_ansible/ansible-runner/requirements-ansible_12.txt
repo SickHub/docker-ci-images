@@ -1,0 +1,5 @@
+ansible<6.0.0
+ansible-base
+ansible-lint
+ansible-lint-junit
+ansible-compat

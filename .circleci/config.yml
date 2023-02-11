@@ -36,6 +36,9 @@ aliases:
     kubeseal_version:
       default: v0.19.4 # github-releases:bitnami-labs/sealed-secrets
       type: string
+    ansible_version:
+      default: latest
+      type: string
     platforms:
       default: linux/amd64
       type: string
@@ -152,6 +155,38 @@ aliases:
               docker push << parameters.repo >>/$img:$TAG
             fi
           done
+  - &build_ansible
+    - checkout
+    - setup_remote_docker:
+        version: 20.10.2
+    - run:
+        # plain docker build x86 without cross-platform
+        name: Build images
+        command: |
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin &> /dev/null || exit 1
+          cd images_ansible
+          for img in $(ls -1d *); do
+            if [ "latest" = "<< parameters.version >>" ]; then
+
+              # use default ARGs of image
+              echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
+              docker build --progress plain \
+                --tag << parameters.repo >>/$img:<< parameters.tag >> ./$img/
+              docker push << parameters.repo >>/$img:<< parameters.tag >>
+            else
+
+              # determine source version and target tag
+              VERSION=<< parameters.version >>
+              TAG=<< parameters.ansible_version >>
+
+              echo "Building << parameters.repo >>/$img:$TAG based on $VERSION"
+              docker build --progress plain \
+                --build-arg ANSIBLE_VERSION=<< parameters.ansible_version >> \
+                --tag << parameters.repo >>/$img:$TAG ./$img/
+              docker push << parameters.repo >>/$img:$TAG
+            fi
+          done
+
 jobs:
   buildx:
     parameters: *parameters
@@ -163,6 +198,11 @@ jobs:
     docker: *docker-dind
     resource_class: small
     steps: *build86
+  build_ansible:
+    parameters: *parameters
+    docker: *docker-dind
+    resource_class: small
+    steps: *build_ansible
 
 workflows:
   version: 2
@@ -202,6 +242,15 @@ workflows:
               kustomize_version: [ "v4.4.1" ]
               kubeval_version: ["latest"]
               kubeseal_version: ["v0.17.1"]
+      - build_ansible:
+          matrix:
+            parameters:
+              version: ["latest"]
+              ansible_version: ["latest"]
+      - build_ansible:
+          matrix:
+            parameters:
+              ansible_version: ["11", "12", "13", "latest"]
 
   # build 'latest' weekly
   weekly:
