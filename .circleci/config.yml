@@ -191,7 +191,7 @@ jobs:
   buildx:
     parameters: *parameters
     docker: *docker-dind
-    resource_class: medium
+    resource_class: small
     steps: *buildx
   build86:
     parameters: *parameters
@@ -201,7 +201,7 @@ jobs:
   build_ansible:
     parameters: *parameters
     docker: *docker-dind
-    resource_class: medium
+    resource_class: small
     steps: *build_ansible
 
 workflows:
