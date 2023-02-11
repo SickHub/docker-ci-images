@@ -167,19 +167,16 @@ aliases:
           cd images_ansible
           for img in $(ls -1d *); do
             if [ "latest" = "<< parameters.version >>" ]; then
-
               # use default ARGs of image
               echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
               docker build --progress plain \
                 --tag << parameters.repo >>/$img:<< parameters.tag >> ./$img/
               docker push << parameters.repo >>/$img:<< parameters.tag >>
             else
-
               # determine source version and target tag
-              VERSION=<< parameters.version >>
               TAG=<< parameters.ansible_version >>
 
-              echo "Building << parameters.repo >>/$img:$TAG based on $VERSION"
+              echo "Building << parameters.repo >>/$img:$TAG based on stable version"
               docker build --progress plain \
                 --build-arg ANSIBLE_VERSION=<< parameters.ansible_version >> \
                 --tag << parameters.repo >>/$img:$TAG ./$img/
@@ -250,7 +247,8 @@ workflows:
       - build_ansible:
           matrix:
             parameters:
-              ansible_version: ["11", "12", "13", "latest"]
+              version: ["stable"]
+              ansible_version: ["11", "12", "13", "14"]
 
   # build 'latest' weekly
   weekly:

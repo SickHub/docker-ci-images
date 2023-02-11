@@ -151,3 +151,16 @@ Run Ansible playbooks
 
 ### Usage
 * use it as pipeline image to run Ansible playbooks and lint or test Ansible roles or playbooks.
+
+## [drpsychick/ansible-runner-alpine](./images_ansible/ansible-runner-alpine)
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/ansible-runner-alpine?sort=date)](https://hub.docker.com/r/drpsychick/ansible-runner-alpine/tags)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/ansible-runner-alpine.svg)](https://hub.docker.com/r/drpsychick/ansible-runner-alpine/)
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/ansible-runner-alpine.svg)](https://hub.docker.com/r/drpsychick/ansible-runner-alpine/)
+![architectures](https://img.shields.io/badge/arch-amd64-green)
+
+Run Ansible playbooks
+* based on `ubuntu` or `alpine`
+* includes `ansible`, `ansible-galaxy`, `ansible-lint`
+
+### Usage
+* use it as pipeline image to run Ansible playbooks and lint or test Ansible roles or playbooks.
