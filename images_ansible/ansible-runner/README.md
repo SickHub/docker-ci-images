@@ -8,6 +8,7 @@ docker run -it --rm drpsychick/ansible-runner:latest ansible --version
 docker run -it --rm drpsychick/ansible-runner:11 ansible --version
 docker run -it --rm drpsychick/ansible-runner:12 ansible --version
 docker run -it --rm drpsychick/ansible-runner:13 ansible --version
+docker run -it --rm drpsychick/ansible-runner:14 ansible --version
 
 # using ansible-galaxy (most collections preinstalled)
 docker run -it --rm drpsychick/ansible-runner:latest ansible-galaxy collection list
