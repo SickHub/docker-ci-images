@@ -28,7 +28,7 @@ aliases:
       default: v2.6.1 # github-releases:argoproj/argo-cd
       type: string
     kustomize_version:
-      default: v4.5.7 # github-releases:kubernetes-sigs/kustomize
+      default: v5.0.0 # github-releases:kubernetes-sigs/kustomize
       type: string
     kubeval_version:
       default: v0.16.1 # github-releases:instrumenta/kubeval
