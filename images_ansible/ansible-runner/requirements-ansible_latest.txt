@@ -1,0 +1,6 @@
+# includes ansible-core 2.14.x
+ansible
+ansible-base
+ansible-lint
+ansible-lint-junit
+ansible-compat

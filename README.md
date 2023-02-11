@@ -135,3 +135,19 @@ Add apps to ArgoCD running on your Kubernetes cluster
 * use it as pipeline image to control ArgoCD: install/sync apps, change RBAC, add repos, ...
 * template charts with `helm` and lint your charts using `ct`
 * `kustomize` for environments and validate your manifests with `kubeval`
+
+
+# Images for Ansible pipelines
+
+## [drpsychick/ansible-runner](./images_ansible/ansible-runner)
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/ansible-runner?sort=date)](https://hub.docker.com/r/drpsychick/ansible-runner/tags)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/ansible-runner.svg)](https://hub.docker.com/r/drpsychick/ansible-runner/)
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/ansible-runner.svg)](https://hub.docker.com/r/drpsychick/ansible-runner/)
+![architectures](https://img.shields.io/badge/arch-amd64-green)
+
+Run Ansible playbooks
+* based on `ubuntu` or `alpine`
+* includes `ansible`, `ansible-galaxy`, `ansible-lint`
+
+### Usage
+* use it as pipeline image to run Ansible playbooks and lint or test Ansible roles or playbooks.

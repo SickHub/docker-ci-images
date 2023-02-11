@@ -1,0 +1,5 @@
+wheel
+cryptography
+jmespath
+boto
+boto3
