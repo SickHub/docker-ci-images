@@ -24,7 +24,7 @@ RUN python3 -m venv .venv \
 ## cleanup
 RUN mkdir -p $HOME/.ansible/roles && \
     mkdir -p $HOME/.ansible/collections && \
-    rm -rf $HOME/.cache \
+    rm -rf $HOME/.cache
 
 USER root
 RUN apk del -r gcc gcc build-base musl-dev libffi-dev python3-dev
