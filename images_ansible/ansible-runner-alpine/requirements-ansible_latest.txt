@@ -5,3 +5,4 @@ ansible-lint
 ansible-lint-junit
 ansible-compat
 cryptography
+pywinrm
