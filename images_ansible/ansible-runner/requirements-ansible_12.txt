@@ -4,3 +4,4 @@ ansible-base
 ansible-lint
 ansible-lint-junit
 ansible-compat
+pywinrm
