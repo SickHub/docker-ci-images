@@ -1,5 +1,5 @@
 ARG VERSION=jammy
-FROM ubuntu:$VERSION
+FROM ubuntu:$VERSION AS builder
 
 # install base packages
 RUN apt-get clean && \
@@ -10,10 +10,10 @@ RUN apt-get clean && \
 # create ansible user
 RUN useradd -U -m -s /bin/bash ansible
 USER ansible
-WORKDIR /home/ansible
 COPY requirements*.txt /home/ansible/
+WORKDIR /home/ansible
 
-ARG ANSIBLE_VERSION="latest"
+ARG ANSIBLE_VERSION=latest
 # latest 2.14
 RUN python3 -m venv .venv \
     && . .venv/bin/activate \
@@ -31,7 +31,11 @@ RUN mkdir -p $HOME/.ansible/roles && \
 USER root
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+
+FROM scratch
+COPY --from=builder / /
 
 USER ansible
-CMD ["latest", "ansible", "--version"]
+WORKDIR /home/ansible
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["ansible", "--version"]

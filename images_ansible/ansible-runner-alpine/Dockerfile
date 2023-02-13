@@ -1,5 +1,5 @@
 ARG VERSION=3
-FROM alpine:$VERSION
+FROM alpine:$VERSION AS builder
 
 # install base packages
 RUN apk --no-cache add gcc build-base musl-dev libffi-dev python3-dev \
@@ -9,8 +9,8 @@ RUN apk --no-cache add gcc build-base musl-dev libffi-dev python3-dev \
 RUN addgroup ansible && \
     adduser -G ansible -D -s /bin/bash ansible
 USER ansible
-WORKDIR /home/ansible
 COPY requirements*.txt /home/ansible/
+WORKDIR /home/ansible
 
 ARG ANSIBLE_VERSION=latest
 RUN python3 -m venv .venv \
@@ -21,15 +21,21 @@ RUN python3 -m venv .venv \
     # reinstall fixes for "ERROR! Unexpected Exception, this is probably a bug: cannot import name 'CollectionRequirement' from 'ansible.galaxy.collection'"
     && pip3 install --force ansible==$(pip3 show ansible |grep ^Version |awk '{print $2}')
 
-
 ## cleanup
+RUN mkdir -p $HOME/.ansible/roles && \
+    mkdir -p $HOME/.ansible/collections && \
+    rm -rf $HOME/.cache
+
 USER root
-RUN apk del -r gcc gcc build-base musl-dev libffi-dev python3-dev && \
-    rm -rf .cache
+RUN apk del -r gcc gcc build-base musl-dev libffi-dev python3-dev
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+
+FROM scratch
+COPY --from=builder / /
 
 USER ansible
+WORKDIR /home/ansible
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["ansible", "--version"]
