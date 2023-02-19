@@ -5,7 +5,7 @@ FROM ubuntu:$VERSION AS builder
 RUN apt-get clean && \
     apt-get update --fix-missing || true && \
     apt-get install -y --no-install-recommends python3-minimal python3-venv netcat iproute2 jq sshpass vim \
-    curl openssh-client && rm -rf /var/lib/apt/lists/*
+    curl openssh-client git && rm -rf /var/lib/apt/lists/*
 
 # create ansible user
 RUN useradd -U -m -s /bin/bash ansible
