@@ -62,7 +62,7 @@ RUN if [ "latest" = $KUBEVAL_VERSION ]; then \
     && chmod +x kubeval && mv kubeval /usr/local/bin
 
 # github-releases:bitnami-labs/sealed-secrets
-ARG KUBESEAL_VERSION=v0.19.5
+ARG KUBESEAL_VERSION=v0.20.1
 RUN export version=$(echo "${KUBESEAL_VERSION}" | tr -d v); \
     curl -sL https://github.com/bitnami-labs/sealed-secrets/releases/download/${KUBESEAL_VERSION}/kubeseal-${version}-linux-amd64.tar.gz -o kubeseal.tgz \
     && tar xzf kubeseal.tgz kubeseal && rm kubeseal.tgz \
