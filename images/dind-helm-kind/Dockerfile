@@ -22,7 +22,7 @@ RUN if [ -z "$CT_ARCH" ]; then CT_ARCH=amd64; fi; \
 
 ARG KIND_URL=https://github.com/kubernetes-sigs/kind/releases
 # github-releases:kubernetes-sigs/kind
-ARG KIND_VERSION=v0.17.0
+ARG KIND_VERSION=v0.18.0
 ARG KIND_ARCH=${TARGETARCH}
 
 RUN if [ -z "$KIND_ARCH" ]; then KIND_ARCH=amd64; fi; \
