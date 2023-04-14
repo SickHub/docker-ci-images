@@ -6,7 +6,7 @@ RUN apk add --update --no-cache ca-certificates git curl jq
 # install kubectl: https://github.com/kubernetes/kubectl/releases
 ARG KUBECTL_URL=https://dl.k8s.io/release
 # github-releases:kubernetes/kubernetes
-ARG KUBECTL_VERSION=v1.27.0
+ARG KUBECTL_VERSION=v1.27.1
 ARG TARGETARCH
 ARG KUBECTL_ARCH=${TARGETARCH}
 
