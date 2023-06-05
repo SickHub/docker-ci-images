@@ -25,7 +25,7 @@ aliases:
       default: v0.19.0 # github-releases:kubernetes-sigs/kind
       type: string
     argocd_version:
-      default: v2.7.3 # github-releases:argoproj/argo-cd
+      default: v2.7.4 # github-releases:argoproj/argo-cd
       type: string
     kustomize_version:
       default: v5.0.0 # github-releases:kubernetes-sigs/kustomize
