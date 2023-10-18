@@ -13,7 +13,7 @@ aliases:
       default: v0.11.2 # github-releases:docker/buildx
       type: string
     kubectl_version:
-      default: v1.28.2 # github-releases:kubernetes/kubernetes
+      default: v1.28.3 # github-releases:kubernetes/kubernetes
       type: string
     helm_version:
       default: v3.13.1 # github-releases:helm/helm
