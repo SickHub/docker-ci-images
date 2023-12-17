@@ -2,7 +2,7 @@ ARG VERSION=latest
 FROM alpine:$VERSION
 
 RUN apk add --update --no-cache ca-certificates git curl jq py3-pip socat \
-    && pip3 install yamllint yamale
+    && pip3 install --break-system-packages yamllint yamale
 
 # github-releases:argoproj/argo-cd
 ARG ARGOCD_VERSION=v2.9.3
@@ -62,7 +62,7 @@ RUN if [ "latest" = $KUBEVAL_VERSION ]; then \
     && chmod +x kubeval && mv kubeval /usr/local/bin
 
 # github-releases:bitnami-labs/sealed-secrets
-ARG KUBESEAL_VERSION=v0.24.4
+ARG KUBESEAL_VERSION=v0.24.5
 RUN export version=$(echo "${KUBESEAL_VERSION}" | tr -d v); \
     curl -sL https://github.com/bitnami-labs/sealed-secrets/releases/download/${KUBESEAL_VERSION}/kubeseal-${version}-linux-amd64.tar.gz -o kubeseal.tgz \
     && tar xzf kubeseal.tgz kubeseal && rm kubeseal.tgz \
