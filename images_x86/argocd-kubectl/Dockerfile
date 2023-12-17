@@ -1,8 +1,7 @@
 ARG VERSION=latest
 FROM alpine:$VERSION
 
-RUN apk add --update --no-cache ca-certificates git curl jq py3-pip socat \
-    && pip3 install yamllint yamale
+RUN apk add --update --no-cache ca-certificates git curl jq py3-pip socat py3-yamllint py3-yamale
 
 # github-releases:argoproj/argo-cd
 ARG ARGOCD_VERSION=v2.9.3
