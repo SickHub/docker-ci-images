@@ -17,11 +17,11 @@ ARG ANSIBLE_VERSION=latest
 # latest 2.14
 RUN python3 -m venv .venv \
     && . .venv/bin/activate \
-    && pip3 install --upgrade pip setuptools \
-    && pip3 install --requirement requirements-venv.txt \
-    && pip3 install --requirement requirements-ansible_${ANSIBLE_VERSION}.txt \
+    && pip3 install --break-system-packages --upgrade pip setuptools \
+    && pip3 install --break-system-packages --requirement requirements-venv.txt \
+    && pip3 install --break-system-packages --requirement requirements-ansible_${ANSIBLE_VERSION}.txt \
     # reinstall fixes for "ERROR! Unexpected Exception, this is probably a bug: cannot import name 'CollectionRequirement' from 'ansible.galaxy.collection'" \
-    && pip3 install --force ansible==$(pip3 show ansible |grep ^Version |awk '{print $2}')
+    && pip3 install --break-system-packages --force ansible==$(pip3 show ansible |grep ^Version |awk '{print $2}')
 
 # cleanup
 RUN mkdir -p $HOME/.ansible/roles && \
