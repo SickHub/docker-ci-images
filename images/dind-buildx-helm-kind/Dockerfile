@@ -2,7 +2,9 @@ ARG VERSION=latest
 FROM drpsychick/dind-buildx-helm:$VERSION
 
 RUN apk add --update --no-cache py3-pip socat \
-    && pip3 install yamllint yamale
+    export VERSION="$(grep VERSION_ID /etc/os-release | cut -d= -f2)" PIP3_EXTRA="" \
+    if [ $(echo $VERSION | cut -d. -f1) -eq 3 -a $(echo $VERSION | cut -d. -f2) -ge 19 ]; then export PIP3_EXTRA="--break-system-packages"; fi \
+    && pip3 install $PIP3_EXTRA yamllint yamale
 
 ARG CT_URL=https://github.com/helm/chart-testing/releases
 # github-releases:helm/chart-testing
