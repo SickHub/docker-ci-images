@@ -22,7 +22,7 @@ aliases:
       default: v3.10.1 # github-releases:helm/chart-testing
       type: string
     kind_version:
-      default: v0.21.0 # github-releases:kubernetes-sigs/kind
+      default: v0.22.0 # github-releases:kubernetes-sigs/kind
       type: string
     argocd_version:
       default: v2.10.0 # github-releases:argoproj/argo-cd
