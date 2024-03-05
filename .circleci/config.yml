@@ -10,7 +10,7 @@ aliases:
       default: https://github.com/docker/buildx/releases
       type: string
     buildx_version:
-      default: v0.12.1 # github-releases:docker/buildx
+      default: v0.13.0 # github-releases:docker/buildx
       type: string
     kubectl_version:
       default: v1.29.2 # github-releases:kubernetes/kubernetes
@@ -68,7 +68,7 @@ aliases:
         command: |
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker context create xbuilder
-          docker buildx create xbuilder --name xbuilder --use
+          docker buildx create xbuilder --use
           docker buildx inspect --bootstrap
     - run:
         name: Build images
