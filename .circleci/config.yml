@@ -119,8 +119,7 @@ aliases:
 
   - &build86
     - checkout
-    - setup_remote_docker:
-        version: 20.10.14
+    - setup_remote_docker
     - run:
         # plain docker build x86 without cross-platform
         name: Build images
@@ -156,8 +155,7 @@ aliases:
           done
   - &build_ansible
     - checkout
-    - setup_remote_docker:
-        version: 20.10.14
+    - setup_remote_docker
     - run:
         # plain docker build x86 without cross-platform
         name: Build images
