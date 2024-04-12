@@ -34,7 +34,7 @@ aliases:
       default: v0.16.1 # github-releases:instrumenta/kubeval
       type: string
     kubeseal_version:
-      default: v0.26.1 # github-releases:bitnami-labs/sealed-secrets
+      default: v0.26.2 # github-releases:bitnami-labs/sealed-secrets
       type: string
     ansible_version:
       default: latest
