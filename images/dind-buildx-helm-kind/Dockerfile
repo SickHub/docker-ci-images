@@ -8,7 +8,7 @@ RUN apk add --update --no-cache py3-pip socat \
 
 ARG CT_URL=https://github.com/helm/chart-testing/releases
 # github-releases:helm/chart-testing
-ARG CT_VERSION=v3.10.1
+ARG CT_VERSION=v3.11.0
 ARG TARGETARCH
 ARG CT_ARCH=${TARGETARCH}
 RUN if [ -z "$CT_ARCH" ]; then CT_ARCH=amd64; fi; \
