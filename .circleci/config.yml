@@ -245,7 +245,7 @@ workflows:
           matrix:
             parameters:
               version: ["stable"]
-              ansible_version: ["11", "12", "13", "14"]
+              ansible_version: ["12", "13", "14", "15", "16"]
 
   # build 'latest' weekly
   weekly:
@@ -303,4 +303,4 @@ workflows:
       - build_ansible:
           matrix:
             parameters:
-              ansible_version: ["11", "12", "13", "latest"]
+              ansible_version: ["12", "13", "14", "15", "16", "latest"]
