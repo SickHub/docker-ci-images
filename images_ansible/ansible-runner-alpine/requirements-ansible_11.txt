@@ -1,8 +1,0 @@
-# includes ansible-core 2.11.x
-ansible<5.0.0
-ansible-base
-ansible-lint<5.5.0
-ansible-lint-junit
-ansible-compat
-cryptography
-pywinrm
