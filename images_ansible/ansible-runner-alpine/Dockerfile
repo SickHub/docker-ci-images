@@ -9,7 +9,9 @@ RUN apk --no-cache add gcc build-base musl-dev libffi-dev python3-dev \
 RUN <<EOT
     set -e
     addgroup ansible
-    adduser -G ansible,sudo -D -s /bin/bash ansible
+    adduser -G ansible -D -s /bin/bash ansible
+    addgroup sudo
+    addgroup ansible sudo
     sed -e 's/^# \(%sudo.*\)/\1/' /etc/sudoers
 EOT
 USER ansible
