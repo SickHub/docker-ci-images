@@ -21,7 +21,7 @@ RUN if [ -z "$KUBECTL_ARCH" ]; then KUBECTL_ARCH=amd64; fi; \
 # install helm: https://github.com/helm/helm/releases
 ARG HELM_URL=https://get.helm.sh
 # github-releases:helm/helm
-ARG HELM_VERSION=v3.15.2
+ARG HELM_VERSION=v3.15.3
 ARG HELM_ARCH=${TARGETARCH}
 
 RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
