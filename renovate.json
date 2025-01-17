@@ -10,7 +10,7 @@
     {
       "matchDatasources": ["github-releases"],
       "matchPackageNames": ["kubernetes-sigs/kustomize"],
-      "versionCompatibility": "^(?<compatibility>.*)-(?<version>.*)$"
+      "versionCompatibility": "^(?<compatibility>.*)/(?<version>.*)$"
     }
   ],
   "customManagers": [
