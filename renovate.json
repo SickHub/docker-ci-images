@@ -4,6 +4,12 @@
     "config:base"
   ],
   "enabledManagers": ["regex"],
+  "packageRules": [
+    {
+      "matchDatasources": ["github-releases"],
+      "versioning": "regex:^(?<compatibility>.*)[-/]?v?(?<major>\\d+)(\\.(?<minor>\\d+))(\\.(?<patch>\\d+))$"
+    }
+  ],
   "regexManagers": [
     {
       "fileMatch": [
