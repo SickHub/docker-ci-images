@@ -28,7 +28,7 @@ aliases:
       default: v2.13.3 # github-releases:argoproj/argo-cd
       type: string
     kustomize_version:
-      default: v5.0.0 # github-releases:kubernetes-sigs/kustomize
+      default: kustomize/v5.0.0 # github-releases:kubernetes-sigs/kustomize
       type: string
     kubeval_version:
       default: v0.16.1 # github-releases:instrumenta/kubeval
@@ -233,7 +233,7 @@ workflows:
               argocd_version: ["v2.1.7"]
               helm_version: ["v3.5.0"]
               kubectl_version: ["stable"]
-              kustomize_version: [ "v4.4.1" ]
+              kustomize_version: [ "kustomize/v4.4.1" ]
               kubeval_version: ["latest"]
               kubeseal_version: ["v0.17.1"]
       - build_ansible:
@@ -266,12 +266,6 @@ workflows:
           matrix:
             parameters:
               version: ["latest"]
-              argocd_version: [ "v2.1.7" ]
-              helm_version: [ "v3.5.0" ]
-              kubectl_version: [ "stable" ]
-              kustomize_version: ["v4.4.1"]
-              kubeval_version: [ "latest" ]
-              kubeseal_version: [ "v0.17.1" ]
 
   # build other tags monthly
   monthly:
