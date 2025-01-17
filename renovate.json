@@ -19,8 +19,7 @@
       "matchStrings": [
         "\\sdefault: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>.*?)\\n",
         "# (?<datasource>.*?):(?<depName>.*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
-      ],
-      "versioningTemplate": "semver"
+      ]
     }
   ]
 }
