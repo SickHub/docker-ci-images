@@ -233,7 +233,7 @@ workflows:
               argocd_version: ["v2.1.7"]
               helm_version: ["v3.5.0"]
               kubectl_version: ["stable"]
-              kustomize_version: [ "kustomize/v4.4.1" ]
+              kustomize_version: [ "kustomize/v5.5.0" ]
               kubeval_version: ["latest"]
               kubeseal_version: ["v0.17.1"]
       - build_ansible:
