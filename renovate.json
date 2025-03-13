@@ -11,8 +11,17 @@
       "matchDatasources": ["github-releases"],
       "matchPackageNames": ["kubernetes-sigs/kustomize"],
       "versionCompatibility": "^(?<compatibility>.*)/(?<version>.*)$"
+    },
+    {
+      "matchUpdateTypes": ["patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
     }
   ],
+  "platformAutomerge": true,
   "customManagers": [
     {
       "customType": "regex",
