@@ -5,3 +5,5 @@ ansible-lint
 ansible-lint-junit
 ansible-compat
 pywinrm
+molecule
+molecule-docker
