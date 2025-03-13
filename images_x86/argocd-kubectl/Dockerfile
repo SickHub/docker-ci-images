@@ -12,7 +12,7 @@ RUN curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/download/${
 # install helm: https://github.com/helm/helm/releases
 ARG HELM_URL=https://get.helm.sh
 # github-releases:helm/helm
-ARG HELM_VERSION=v3.17.1
+ARG HELM_VERSION=v3.17.2
 ARG HELM_ARCH=amd64
 
 RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
