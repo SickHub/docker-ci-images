@@ -30,8 +30,8 @@
         "^images.*/.*/Dockerfile$"
       ],
       "matchStrings": [
-        "\\sdefault: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>.*?)\\n",
-        "# (?<datasource>.*?):(?<depName>.*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
+        "\\sdefault: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>[^:]*?)\\n",
+        "# (?<datasource>.*?):(?<depName>[^:]*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
       ]
     },
     {
