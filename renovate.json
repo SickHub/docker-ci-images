@@ -42,7 +42,7 @@
       ],
       "matchStrings": [
         "\\sdefault: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>.*?):(?<extractVersion>.*?)\\n",
-        "# (?<datasource>.*?):(?<depName>.*?):(?<extractVersion>.*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n",
+        "# (?<datasource>.*?):(?<depName>.*?):(?<extractVersion>.*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
       ]
     }
   ]
