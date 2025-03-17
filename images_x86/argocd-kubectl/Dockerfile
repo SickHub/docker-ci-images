@@ -45,9 +45,9 @@ RUN if [ "stable" = $KUBECTL_VERSION ]; then \
     && curl -sLO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
     && chmod +x kubectl && mv kubectl /usr/local/bin
 
-# github-releases:kubernetes-sigs/kustomize
-ARG KUSTOMIZE_VERSION=kustomize/v5.6.0
-RUN export VERSION=${KUSTOMIZE_VERSION//*\//}; curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${VERSION}/kustomize_${VERSION}_linux_amd64.tar.gz -o kustomize_linux_amd64.tar.gz \
+# github-releases:kubernetes-sigs/kustomize:kustomize/(?<version>.*)
+ARG KUSTOMIZE_VERSION=v5.6.0
+RUN curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${VERSION}/kustomize_${VERSION}_linux_amd64.tar.gz -o kustomize_linux_amd64.tar.gz \
     && tar xvzf kustomize_linux_amd64.tar.gz kustomize && rm kustomize_linux_amd64.tar.gz \
     && chmod +x kustomize && mv kustomize /usr/local/bin
 

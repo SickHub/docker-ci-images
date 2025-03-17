@@ -31,7 +31,9 @@
       ],
       "matchStrings": [
         "\\sdefault: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>.*?)\\n",
-        "# (?<datasource>.*?):(?<depName>.*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
+        "\\sdefault: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>[^\\s:]*?):(?<extractVersion>.*?)\\n",
+        "# (?<datasource>.*?):(?<depName>.*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n",
+        "# (?<datasource>.*?):(?<depName>[^\\s:]*?):(?<extractVersion>.*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
       ]
     }
   ]
