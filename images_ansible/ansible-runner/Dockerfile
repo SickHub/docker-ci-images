@@ -18,7 +18,6 @@ COPY requirements*.txt /home/ansible/
 WORKDIR /home/ansible
 
 ARG ANSIBLE_VERSION=latest
-# latest 2.14
 RUN <<EOT
     set -e
     python3 -m venv .venv

@@ -1,4 +1,4 @@
-# includes ansible-core 2.14.x
+# includes latest ansible-core
 ansible
 ansible-base
 ansible-lint
