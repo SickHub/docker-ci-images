@@ -24,7 +24,7 @@ RUN if [ -z "$HELM_ARCH" ]; then HELM_ARCH=amd64; fi; \
 
 ARG CT_URL=https://github.com/helm/chart-testing/releases
 # github-releases:helm/chart-testing
-ARG CT_VERSION=v3.12.0
+ARG CT_VERSION=v3.13.0
 ARG TARGETARCH
 ARG CT_ARCH=${TARGETARCH}
 
