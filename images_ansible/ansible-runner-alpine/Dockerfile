@@ -3,7 +3,7 @@ FROM alpine:$VERSION AS builder
 
 # install base packages
 RUN apk --no-cache add gcc build-base musl-dev libffi-dev python3-dev \
-    python3 py3-pip jq sshpass vim openssh-client curl bash git sudo rsync unzip gpg gpg-agent
+    python3 py3-pip jq sshpass vim openssh-client curl bash git sudo rsync unzip gpg gpg-agent dirmngr
 
 ## create ansible user with sudo permissions
 RUN <<EOT
