@@ -5,14 +5,14 @@ FROM alpine:$VERSION AS builder
 RUN apk --no-cache add gcc build-base musl-dev libffi-dev python3-dev \
     python3 py3-pip jq sshpass vim openssh-client curl bash git sudo rsync unzip gpg gpg-agent
 
-## create ansible user
+## create ansible user with sudo permissions
 RUN <<EOT
     set -e
     addgroup ansible
     adduser -G ansible -D -s /bin/bash ansible
     addgroup sudo
     addgroup ansible sudo
-    sed -e 's/^# \(%sudo.*\)/\1/' /etc/sudoers
+    echo "%sudo ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 EOT
 USER ansible
 COPY requirements*.txt /home/ansible/
