@@ -11,8 +11,11 @@ RUN <<EOT
     rm -rf /var/lib/apt/lists/*
 EOT
 
-# create ansible user
-RUN useradd -U -m -G sudo -s /bin/bash ansible
+# create ansible user with sudo permissions
+RUN <<EOT
+    useradd -U -m -G sudo -s /bin/bash ansible
+    echo "%sudo ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
+EOT
 USER ansible
 COPY requirements*.txt /home/ansible/
 WORKDIR /home/ansible
