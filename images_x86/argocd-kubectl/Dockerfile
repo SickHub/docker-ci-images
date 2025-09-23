@@ -5,7 +5,7 @@ RUN apk add --update --no-cache ca-certificates git curl jq py3-pip socat \
     && pip3 install --break-system-packages yamllint yamale
 
 # github-releases:argoproj/argo-cd
-ARG ARGOCD_VERSION=v3.1.6
+ARG ARGOCD_VERSION=v3.1.7
 RUN curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/download/${ARGOCD_VERSION}/argocd-linux-amd64 \
     && chmod +x argocd && mv argocd /usr/local/bin
 
