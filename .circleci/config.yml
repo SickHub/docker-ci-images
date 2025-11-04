@@ -10,7 +10,7 @@ aliases:
       default: https://github.com/docker/buildx/releases
       type: string
     buildx_version:
-      default: v0.28.0 # github-releases:docker/buildx
+      default: v0.29.1 # github-releases:docker/buildx
       type: string
     kubectl_version:
       default: v1.34.1 # github-releases:kubernetes/kubernetes
