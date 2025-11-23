@@ -164,3 +164,18 @@ Run Ansible playbooks
 
 ### Usage
 * use it as pipeline image to run Ansible playbooks and lint or test Ansible roles or playbooks.
+
+
+# Misc images
+
+## [drpsychick/minio-client](./images/minio-client)
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/minio-client?sort=date)](https://hub.docker.com/r/drpsychick/minio-client/tags)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/minio-client.svg)](https://hub.docker.com/r/drpsychick/minio-client/)
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/minio-client.svg)](https://hub.docker.com/r/drpsychick/minio-client/)
+![architectures](https://img.shields.io/badge/arch-amd64,arm64-green)
+
+Up- and download files from any S3 compatible service
+* based on `alpine`
+
+### Usage
+* use it as pipeline image to up- or download files from S3.

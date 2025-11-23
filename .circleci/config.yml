@@ -181,6 +181,49 @@ aliases:
             fi
           done
 
+  - &build_misc
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: Install buildx
+        command: |
+          apk add --no-cache curl
+          mkdir -p ~/.docker/cli-plugins
+          fileName="buildx-<< parameters.buildx_version >>.linux-amd64"
+          url="<< parameters.buildx_url >>/download/<< parameters.buildx_version >>/${fileName}"
+          curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
+          chmod a+x ~/.docker/cli-plugins/docker-buildx
+          docker buildx install
+    - run:
+        name: Bootstrap buildx
+        command: |
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker context create xbuilder
+          docker buildx create xbuilder --use
+          docker buildx inspect --bootstrap
+    - run:
+        # plain docker build x86 without cross-platform
+        name: Build images
+        command: |
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin &> /dev/null || exit 1
+          cd images_misc
+          for img in $(ls -1d *); do
+            if [ "latest" = "<< parameters.version >>" ]; then
+              # use default ARGs of image
+              echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
+              docker buildx build --progress plain --platform << parameters.platforms >> \
+                --tag << parameters.repo >>/$img:<< parameters.tag >> --push ./$img/
+            else
+              # determine source version and target tag
+              TAG=<< parameters.version >>
+
+              echo "Building << parameters.repo >>/$img:$TAG based on stable version"
+              docker buildx build --progress plain --platform << parameters.platforms >> \
+                --build-arg VERSION=<< parameters.version >> \
+                --tag << parameters.repo >>/$img:$TAG --push ./$img/
+            fi
+          done
+
 jobs:
   buildx:
     parameters: *parameters
@@ -197,6 +240,11 @@ jobs:
     docker: *docker-dind
     resource_class: small
     steps: *build_ansible
+  build_misc:
+    parameters: *parameters
+    docker: *docker-dind
+    resource_class: small
+    steps: *build_misc
 
 workflows:
   version: 2
@@ -246,6 +294,11 @@ workflows:
             parameters:
               version: ["stable"]
               ansible_version: ["5", "6", "7", "8", "9", "10"]
+      - build_misc:
+          matrix:
+            parameters:
+              platforms: [ "linux/amd64,linux/arm64" ]
+              version: ["latest"]
 
   # build 'latest' weekly
   weekly:
@@ -298,3 +351,8 @@ workflows:
           matrix:
             parameters:
               ansible_version: ["5", "6", "7", "8", "9", "10", "latest"]
+      - build_misc:
+          matrix:
+            parameters:
+              platforms: [ "linux/amd64,linux/arm64" ]
+              version: ["latest"]
