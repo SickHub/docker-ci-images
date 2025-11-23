@@ -181,6 +181,34 @@ aliases:
             fi
           done
 
+  - &build_misc
+    - checkout
+    - setup_remote_docker
+    - run:
+        # plain docker build x86 without cross-platform
+        name: Build images
+        command: |
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin &> /dev/null || exit 1
+          cd images_misc
+          for img in $(ls -1d *); do
+            if [ "latest" = "<< parameters.version >>" ]; then
+              # use default ARGs of image
+              echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
+              docker build --progress plain --platform << parameters.platforms >> \
+                --tag << parameters.repo >>/$img:<< parameters.tag >> ./$img/
+              docker push << parameters.repo >>/$img:<< parameters.tag >>
+            else
+              # determine source version and target tag
+              TAG=<< parameters.version >>
+
+              echo "Building << parameters.repo >>/$img:$TAG based on stable version"
+              docker build --progress plain --platform << parameters.platforms >> \
+                --build-arg VERSION=<< parameters.version >> \
+                --tag << parameters.repo >>/$img:$TAG ./$img/
+              docker push << parameters.repo >>/$img:$TAG
+            fi
+          done
+
 jobs:
   buildx:
     parameters: *parameters
@@ -197,6 +225,11 @@ jobs:
     docker: *docker-dind
     resource_class: small
     steps: *build_ansible
+  build_misc:
+    parameters: *parameters
+    docker: *docker-dind
+    resource_class: small
+    steps: *build_misc
 
 workflows:
   version: 2
@@ -246,6 +279,11 @@ workflows:
             parameters:
               version: ["stable"]
               ansible_version: ["5", "6", "7", "8", "9", "10"]
+      - build_misc:
+          matrix:
+            parameters:
+              platforms: [ "linux/amd64,linux/arm64" ]
+              version: ["latest"]
 
   # build 'latest' weekly
   weekly:
@@ -298,3 +336,8 @@ workflows:
           matrix:
             parameters:
               ansible_version: ["5", "6", "7", "8", "9", "10", "latest"]
+      - build_misc:
+          matrix:
+            parameters:
+              platforms: [ "linux/amd64,linux/arm64" ]
+              version: ["latest"]
