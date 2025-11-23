@@ -212,8 +212,7 @@ aliases:
               # use default ARGs of image
               echo "Building << parameters.repo >>/$img:<< parameters.tag >>"
               docker buildx build --progress plain --platform << parameters.platforms >> \
-                --tag << parameters.repo >>/$img:<< parameters.tag >> ./$img/
-              docker push << parameters.repo >>/$img:<< parameters.tag >>
+                --tag << parameters.repo >>/$img:<< parameters.tag >> --push ./$img/
             else
               # determine source version and target tag
               TAG=<< parameters.version >>
@@ -221,8 +220,7 @@ aliases:
               echo "Building << parameters.repo >>/$img:$TAG based on stable version"
               docker buildx build --progress plain --platform << parameters.platforms >> \
                 --build-arg VERSION=<< parameters.version >> \
-                --tag << parameters.repo >>/$img:$TAG ./$img/
-              docker push << parameters.repo >>/$img:$TAG
+                --tag << parameters.repo >>/$img:$TAG --push ./$img/
             fi
           done
 
