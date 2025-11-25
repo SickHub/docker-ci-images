@@ -27,10 +27,12 @@
       "customType": "regex",
       "fileMatch": [
         "^.circleci/config.yml$",
+        "^.github/workflows/*.yml$",
         "^images.*/.*/Dockerfile$"
       ],
       "matchStrings": [
         "\\sdefault: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>[^:]*?)\\n",
+        "_version: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>[^:]*?)\\n",
         "# (?<datasource>.*?):(?<depName>[^:]*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
       ]
     },
