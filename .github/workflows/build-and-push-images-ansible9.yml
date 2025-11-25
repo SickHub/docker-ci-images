@@ -1,4 +1,4 @@
-name: Build and push x86 images to GHCR
+name: Build and push Ansible images to GHCR
 
 on:
   push:
@@ -8,13 +8,16 @@ on:
 #    branches:
 #      - main
 
+env:
+  ansible_version: 9
+
 jobs:
   build-and-push-image:
     permissions:
       contents: read
       packages: write
-    uses: ./.github/workflows/x86-images.yml
+    uses: ./.github/workflows/ansible-images.yml
     with:
-      version: "latest"
+      version: "9"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}

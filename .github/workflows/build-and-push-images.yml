@@ -1,4 +1,4 @@
-name: Build and Push DinD Images to GHCR
+name: Build and push DinD images to GHCR
 
 on:
   push:

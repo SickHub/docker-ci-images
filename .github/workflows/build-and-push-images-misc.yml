@@ -1,4 +1,4 @@
-name: Build and push x86 images to GHCR
+name: Build and push misc images to GHCR
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    uses: ./.github/workflows/x86-images.yml
+    uses: ./.github/workflows/misc-images.yml
     with:
       version: "latest"
     secrets:

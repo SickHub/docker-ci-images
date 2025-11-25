@@ -1,4 +1,4 @@
-name: Build and push DinD images
+name: Build and push x86 images
 
 on:
   workflow_call:
@@ -48,9 +48,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./images_x86/${{ inputs.image }}/Dockerfile
+          file: ./images_x86/${{ matrix.image }}/Dockerfile
           push: true
-          tags: ghcr.io/sickhub/${{ inputs.image }}:${{ inputs.version }}
+          tags: ghcr.io/sickhub/${{ matrix.image }}:${{ inputs.version }}
           platforms: "linux/amd64"
           build-args: |
             "BUILDX_VERSION=${{ env.buildx_version }}"
