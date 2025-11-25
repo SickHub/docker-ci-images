@@ -3,13 +3,7 @@ name: Build and push DinD images
 on:
   workflow_call:
     inputs:
-      image:
-        required: true
-        type: string
       version:
-        required: true
-        type: string
-      platforms:
         required: true
         type: string
     secrets:
@@ -53,10 +47,10 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./images/${{ inputs.image }}/Dockerfile
+          file: ./images/${{ matrix.image }}/Dockerfile
           push: true
-          tags: ghcr.io/sickhub/${{ inputs.image }}:${{ inputs.version }}
-          platforms: ${{ inputs.platforms }}
+          tags: ghcr.io/sickhub/${{ matrix.image }}:${{ inputs.version }}
+          platforms: ["linux/amd64,linux/arm64"]
           build-args: |
             "BUILDX_VERSION=${{ env.buildx_version }}"
             "KUBECTL_VERSION=${{ env.kubectl_version }}"
