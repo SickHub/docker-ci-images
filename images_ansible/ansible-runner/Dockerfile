@@ -1,4 +1,4 @@
-ARG VERSION=jammy
+ARG VERSION=noble
 FROM ubuntu:$VERSION AS builder
 
 # install base packages
@@ -7,7 +7,7 @@ RUN <<EOT
     apt-get clean
     apt-get update --fix-missing
     apt-get install -y --no-install-recommends \
-    python3-minimal python3-venv netcat iproute2 jq sshpass vim curl openssh-client git sudo rsync unzip gpg gpg-agent dirmngr
+    python3-minimal python3-venv netcat-openbsd iproute2 jq sshpass vim curl openssh-client git sudo rsync unzip gpg gpg-agent dirmngr
     rm -rf /var/lib/apt/lists/*
 EOT
 

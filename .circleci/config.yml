@@ -254,22 +254,22 @@ workflows:
           matrix:
             parameters:
               platforms: ["linux/amd64,linux/arm64"]
-      - buildx:
-          matrix:
-            parameters:
-              platforms: ["linux/amd64,linux/arm64"]
-              version: ["20-dind"]
-              kubectl_version: ["v1.20.4"]
-              helm_version: ["v3.5.0"]
-              kind_version: [ "v0.10.0" ]
-      - buildx:
-          matrix:
-            parameters:
-              platforms: ["linux/amd64,linux/arm64"]
-              version: ["19-dind"]
-              kubectl_version: ["v1.19.4"]
-              helm_version: ["v3.4.2"]
-              kind_version: ["v0.9.0"]
+#      - buildx:
+#          matrix:
+#            parameters:
+#              platforms: ["linux/amd64,linux/arm64"]
+#              version: ["20-dind"]
+#              kubectl_version: ["v1.20.4"]
+#              helm_version: ["v3.5.0"]
+#              kind_version: [ "v0.10.0" ]
+#      - buildx:
+#          matrix:
+#            parameters:
+#              platforms: ["linux/amd64,linux/arm64"]
+#              version: ["19-dind"]
+#              kubectl_version: ["v1.19.4"]
+#              helm_version: ["v3.4.2"]
+#              kind_version: ["v0.9.0"]
       - build86:
           matrix:
             parameters:
@@ -293,7 +293,7 @@ workflows:
           matrix:
             parameters:
               version: ["stable"]
-              ansible_version: ["5", "6", "7", "8", "9", "10"]
+              ansible_version: ["8", "9", "10", "11", "12"]
       - build_misc:
           matrix:
             parameters:
@@ -350,7 +350,7 @@ workflows:
       - build_ansible:
           matrix:
             parameters:
-              ansible_version: ["5", "6", "7", "8", "9", "10", "latest"]
+              ansible_version: ["8", "9", "10", "11", "12", "latest"]
       - build_misc:
           matrix:
             parameters:

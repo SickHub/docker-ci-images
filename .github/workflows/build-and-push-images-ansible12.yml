@@ -1,4 +1,4 @@
-name: Build and push Ansible 9 images to GHCR
+name: Build and push Ansible 12 images to GHCR
 
 on:
   push:
@@ -15,6 +15,6 @@ jobs:
       packages: write
     uses: ./.github/workflows/ansible-images.yml
     with:
-      version: "9"
+      version: "12"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
