@@ -1,0 +1,20 @@
+name: Build and push x86 images to GHCR
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-and-push-image:
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/x86-images.yml
+    with:
+      version: "latest"
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}

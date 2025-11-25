@@ -17,6 +17,9 @@ A collection of images that can be used in CI pipelines based on docker.
 * GitLab-CI
 * ...
 
+## UPDATE
+Now the images are also available on GitHub container registry, for example: [ghcr.io/sickhub/dind-helm](https://github.com/sickhub/docker-ci-images/pkgs/container/dind-helm)
+
 ## Purpose
 Instead of installing the dependencies on every run and possibly using 
 different images for every stage (which is ok, don't get me wrong), 
