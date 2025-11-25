@@ -3,10 +3,10 @@ name: Build and push x86 images to GHCR
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-push-image:
