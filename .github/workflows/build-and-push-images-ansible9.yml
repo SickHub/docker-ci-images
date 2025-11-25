@@ -1,4 +1,4 @@
-name: Build and push Ansible images to GHCR
+name: Build and push Ansible 9 images to GHCR
 
 on:
   push:
