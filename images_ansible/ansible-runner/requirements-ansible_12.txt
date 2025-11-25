@@ -1,5 +1,5 @@
-# includes ansible-core 2.14.x
-ansible<8.0.0
+# includes ansible-core 2.19.x
+ansible<13.0.0
 ansible-base
 ansible-lint
 ansible-lint-junit

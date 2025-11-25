@@ -11,7 +11,7 @@ on:
         required: true
 
 env:
-  ansible_version: 10
+  ansible_version: latest
   push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
 
 jobs:

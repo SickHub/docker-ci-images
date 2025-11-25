@@ -9,7 +9,7 @@ on:
       - master
 
 env:
-  ansible_version: 9
+  ansible_version: 11
 
 jobs:
   build-and-push-image:
