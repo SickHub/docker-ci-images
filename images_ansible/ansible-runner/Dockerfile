@@ -1,4 +1,4 @@
-ARG VERSION=jammy
+ARG VERSION=noble
 FROM ubuntu:$VERSION AS builder
 
 # install base packages
