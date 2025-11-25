@@ -11,7 +11,6 @@ on:
         required: true
 
 env:
-  ansible_version: latest
   push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
 
 jobs:
@@ -47,4 +46,4 @@ jobs:
           tags: ghcr.io/sickhub/${{ matrix.image }}:${{ inputs.version }}
           platforms: "linux/amd64"
           build-args: |
-            "ANSIBLE_VERSION=${{ env.ansible_version }}"
+            "ANSIBLE_VERSION=${{ inputs.version }}"
