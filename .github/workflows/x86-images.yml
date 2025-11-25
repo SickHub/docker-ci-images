@@ -47,7 +47,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./images_x86/${{ matrix.image }}
           file: ./images_x86/${{ matrix.image }}/Dockerfile
           push: true
           tags: ghcr.io/sickhub/${{ matrix.image }}:${{ inputs.version }}
