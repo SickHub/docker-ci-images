@@ -19,7 +19,7 @@ env:
   kustomize_version: v5.6.0 # github-releases:kubernetes-sigs/kustomize:kustomize/(?<version>.*)
   kubeseal_version: v0.33.1 # github-releases:bitnami-labs/sealed-secrets
   argocd_version: v3.2.0 # github-releases:argoproj/argo-cd
-  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }
+  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
 
 jobs:
   build-and-push-image:

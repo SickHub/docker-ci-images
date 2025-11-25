@@ -12,7 +12,7 @@ on:
 
 env:
   ansible_version: 10
-  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }
+  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
 
 jobs:
   build-and-push-image:

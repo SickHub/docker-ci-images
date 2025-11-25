@@ -11,7 +11,7 @@ on:
         required: true
 
 env:
-  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }
+  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
 
 jobs:
   build-and-push-image:

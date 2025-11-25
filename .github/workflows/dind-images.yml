@@ -18,7 +18,7 @@ env:
   kind_version: v0.30.0 # github-releases:kubernetes-sigs/kind
   kustomize_version: v5.6.0 # github-releases:kubernetes-sigs/kustomize:kustomize/(?<version>.*)
   kubeseal_version: v0.33.1 # github-releases:bitnami-labs/sealed-secrets
-  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }
+  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
 
 jobs:
   build-and-push-image:
