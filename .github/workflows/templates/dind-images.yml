@@ -1,12 +1,20 @@
-name: Build and Push Images to GHCR
+name: Build and push DinD images
 
 on:
-  push:
-#    branches:
-#      - main
-#  pull_request:
-#    branches:
-#      - main
+  workflow_call:
+    inputs:
+      image:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      platforms:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
 
 env:
   buildx_version: v0.30.1 # github-releases:docker/buildx
@@ -16,8 +24,6 @@ env:
   kind_version: v0.30.0 # github-releases:kubernetes-sigs/kind
   kustomize_version: v5.6.0 # github-releases:kubernetes-sigs/kustomize:kustomize/(?<version>.*)
   kubeseal_version: v0.33.1 # github-releases:bitnami-labs/sealed-secrets
-  argocd_version: v3.2.0 # github-releases:argoproj/argo-cd
-  ansible_version: latest
 
 jobs:
   build-and-push-image:
@@ -27,7 +33,6 @@ jobs:
       packages: write
     strategy:
       matrix:
-        platforms: ["linux/amd64,linux/arm64"]
         image: ["dind-buildx", "dind-buildx-helm", "dind-buildx-helm-kind", "dind-helm", "dind-helm-kind"]
 
     steps:
@@ -48,10 +53,10 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./images/${{ matrix.image }}/Dockerfile
+          file: ./images/${{ inputs.image }}/Dockerfile
           push: true
-          tags: ghcr.io/sickhub/${{ matrix.image }}:latest
-          platforms: ${{ matrix.platforms }}
+          tags: ghcr.io/sickhub/${{ inputs.image }}:${{ inputs.version }}
+          platforms: ${{ inputs.platforms }}
           build-args: |
             "BUILDX_VERSION=${{ env.buildx_version }}"
             "KUBECTL_VERSION=${{ env.kubectl_version }}"

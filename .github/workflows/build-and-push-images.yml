@@ -1,0 +1,23 @@
+name: Build and Push DinD Images to GHCR
+
+on:
+  push:
+#    branches:
+#      - main
+#  pull_request:
+#    branches:
+#      - main
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+    # passing the secret to an action
+      - name: Pass the received secret to an action
+        uses: ./.github/workflows/templates/dind-images.yml
+        with:
+          image: ${{ matrix.image }}
+          version: "latest"
