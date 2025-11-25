@@ -19,6 +19,7 @@ env:
   kustomize_version: v5.6.0 # github-releases:kubernetes-sigs/kustomize:kustomize/(?<version>.*)
   kubeseal_version: v0.33.1 # github-releases:bitnami-labs/sealed-secrets
   argocd_version: v3.2.0 # github-releases:argoproj/argo-cd
+  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }
 
 jobs:
   build-and-push-image:
@@ -49,7 +50,7 @@ jobs:
         with:
           context: ./images_x86/${{ matrix.image }}
           file: ./images_x86/${{ matrix.image }}/Dockerfile
-          push: true
+          push: ${{ env.push_condition }}
           tags: ghcr.io/sickhub/${{ matrix.image }}:${{ inputs.version }}
           platforms: "linux/amd64"
           build-args: |

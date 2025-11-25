@@ -12,6 +12,7 @@ on:
 
 env:
   ansible_version: 10
+  push_condition: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }
 
 jobs:
   build-and-push-image:
@@ -42,7 +43,7 @@ jobs:
         with:
           context: ./images_ansible/${{ matrix.image }}
           file: ./images_ansible/${{ matrix.image }}/Dockerfile
-          push: true
+          push: ${{ env.push_condition }}
           tags: ghcr.io/sickhub/${{ matrix.image }}:${{ inputs.version }}
           platforms: "linux/amd64"
           build-args: |
