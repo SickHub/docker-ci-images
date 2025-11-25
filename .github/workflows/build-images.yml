@@ -2,8 +2,7 @@ name: Build and Push Images to GHCR
 
 on:
   push:
-    branches:
-      - *
+#    branches:
 #      - main
 #  pull_request:
 #    branches:
