@@ -51,16 +51,6 @@ RUN curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kust
     && tar xvzf kustomize_linux_amd64.tar.gz kustomize && rm kustomize_linux_amd64.tar.gz \
     && chmod +x kustomize && mv kustomize /usr/local/bin
 
-ARG KUBEVAL_VERSION=latest
-RUN if [ "latest" = $KUBEVAL_VERSION ]; then \
-      URL="https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz"; \
-    else \
-      URL="https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz"; \
-    fi \
-    && curl -sLO $URL \
-    && tar xzf kubeval-linux-amd64.tar.gz kubeval && rm kubeval-linux-amd64.tar.gz \
-    && chmod +x kubeval && mv kubeval /usr/local/bin
-
 # github-releases:bitnami-labs/sealed-secrets
 ARG KUBESEAL_VERSION=v0.33.1
 RUN export version=$(echo "${KUBESEAL_VERSION}" | tr -d v); \

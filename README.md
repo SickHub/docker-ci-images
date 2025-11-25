@@ -130,14 +130,14 @@ Same as above plus:
 ![architectures](https://img.shields.io/badge/arch-amd64-green)
 
 Add apps to ArgoCD running on your Kubernetes cluster
-* based on `bitnami/argo-cd`
-* includes `kubectl`, `kubeval` and `kubeseal` so you can validate your manifests and encrypt your secrets for git
+* based on `alpine` with `argo-cd`
+* includes `kubectl` and `kubeseal` so you can validate your manifests and encrypt your secrets for git
 * includes `helm`, `kustomize`, `ct` so you can generate manifests and test your helm chart
 
 ### Usage
 * use it as pipeline image to control ArgoCD: install/sync apps, change RBAC, add repos, ...
 * template charts with `helm` and lint your charts using `ct`
-* `kustomize` for environments and validate your manifests with `kubeval`
+* `kustomize` for environments
 
 
 # Images for Ansible pipelines
