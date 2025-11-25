@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    uses: ./.github/workflows/templates/dind-images.yml
+    uses: ./.github/workflows/dind-images.yml
     with:
       image: ${{ matrix.image }}
       version: "latest"
