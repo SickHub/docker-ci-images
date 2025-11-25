@@ -50,7 +50,7 @@ jobs:
           context: .
           file: ./images/${{ matrix.image }}/Dockerfile
           push: true
-          tags: ghcr.io/sickhub/${{ matrix.image }}:${{ matrix.version }}
+          tags: ghcr.io/sickhub/${{ matrix.image }}:latest
           platforms: ${{ matrix.platforms }}
           build-args: |
             "BUILDX_VERSION=${{ env.buildx_version }}"
