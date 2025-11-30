@@ -44,6 +44,6 @@ jobs:
           file: ./images_ansible/${{ matrix.image }}/Dockerfile
           push: ${{ env.push_condition }}
           tags: ghcr.io/sickhub/${{ matrix.image }}:${{ inputs.version }}
-          platforms: "linux/amd64"
+          platforms: "linux/amd64,linux/arm64"
           build-args: |
             "ANSIBLE_VERSION=${{ inputs.version }}"
