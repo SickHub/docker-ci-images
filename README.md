@@ -146,7 +146,7 @@ Add apps to ArgoCD running on your Kubernetes cluster
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/ansible-runner?sort=date)](https://hub.docker.com/r/drpsychick/ansible-runner/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/ansible-runner.svg)](https://hub.docker.com/r/drpsychick/ansible-runner/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/ansible-runner.svg)](https://hub.docker.com/r/drpsychick/ansible-runner/)
-![architectures](https://img.shields.io/badge/arch-amd64-green)
+![architectures](https://img.shields.io/badge/arch-amd64,arm64-green)
 
 Run Ansible playbooks
 * based on `ubuntu` or `alpine`
@@ -159,7 +159,7 @@ Run Ansible playbooks
 [![Docker image](https://img.shields.io/docker/image-size/drpsychick/ansible-runner-alpine?sort=date)](https://hub.docker.com/r/drpsychick/ansible-runner-alpine/tags)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/ansible-runner-alpine.svg)](https://hub.docker.com/r/drpsychick/ansible-runner-alpine/)
 [![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/ansible-runner-alpine.svg)](https://hub.docker.com/r/drpsychick/ansible-runner-alpine/)
-![architectures](https://img.shields.io/badge/arch-amd64-green)
+![architectures](https://img.shields.io/badge/arch-amd64,arm64-green)
 
 Run Ansible playbooks
 * based on `ubuntu` or `alpine`
