@@ -16,7 +16,7 @@ aliases:
       default: v1.35.0 # github-releases:kubernetes/kubernetes
       type: string
     helm_version:
-      default: v3.19.4 # github-releases:helm/helm
+      default: v4.0.4 # github-releases:helm/helm
       type: string
     ct_version:
       default: v3.14.0 # github-releases:helm/chart-testing
