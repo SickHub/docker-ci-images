@@ -52,7 +52,7 @@ RUN curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kust
     && chmod +x kustomize && mv kustomize /usr/local/bin
 
 # github-releases:bitnami-labs/sealed-secrets
-ARG KUBESEAL_VERSION=v0.34.0
+ARG KUBESEAL_VERSION=v0.35.0
 RUN export version=$(echo "${KUBESEAL_VERSION}" | tr -d v); \
     curl -sL https://github.com/bitnami-labs/sealed-secrets/releases/download/${KUBESEAL_VERSION}/kubeseal-${version}-linux-amd64.tar.gz -o kubeseal.tgz \
     && tar xzf kubeseal.tgz kubeseal && rm kubeseal.tgz \
