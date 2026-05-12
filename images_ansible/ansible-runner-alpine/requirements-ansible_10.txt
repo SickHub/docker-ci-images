@@ -4,6 +4,7 @@ ansible-base
 ansible-lint
 ansible-lint-junit
 ansible-compat
+ansible-galaxy
 pywinrm
 molecule
 molecule-docker
