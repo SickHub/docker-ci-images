@@ -26,7 +26,6 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^.circleci/config.yml$",
         "^.github/workflows/*.yml$",
         "^images.*/.*/Dockerfile$"
       ],

@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - master
+  # monthly: 1st of month 5:03 am, UTC (replaces CircleCI 'monthly' build_ansible job)
+  schedule:
+    - cron: "3 5 1 * *"
 
 jobs:
   build-and-push-image:
@@ -18,3 +21,5 @@ jobs:
       version: "12"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
+      docker_user: ${{ secrets.DOCKER_USER }}
+      docker_pass: ${{ secrets.DOCKER_PASS }}
