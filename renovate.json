@@ -32,13 +32,12 @@
       "matchStrings": [
         "\\sdefault: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>[^:]*?)\\n",
         "_version: (?<currentValue>.*?) # (?<datasource>.*?):(?<depName>[^:]*?)\\n",
-        "# (?<datasource>.*?):(?<depName>[^:]*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
+        "# (?<datasource>[^:]*?):(?<depName>[^:]*?)\\sARG .*?_VERSION=(?<currentValue>.*)\\n"
       ]
     },
     {
       "customType": "regex",
       "fileMatch": [
-        "^.circleci/config.yml$",
         "^images.*/.*/Dockerfile$"
       ],
       "matchStrings": [
