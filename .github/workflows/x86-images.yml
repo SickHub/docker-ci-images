@@ -51,7 +51,9 @@ jobs:
           context: ./images_x86/${{ matrix.image }}
           file: ./images_x86/${{ matrix.image }}/Dockerfile
           push: ${{ env.push_condition }}
-          tags: ghcr.io/sickhub/${{ matrix.image }}:${{ inputs.version }}
+          tags: |
+            ghcr.io/sickhub/${{ matrix.image }}:${{ inputs.version }}
+            ghcr.io/sickhub/${{ matrix.image }}:git-${{ github.sha }}
           platforms: "linux/amd64"
           build-args: |
             "BUILDX_VERSION=${{ env.buildx_version }}"
