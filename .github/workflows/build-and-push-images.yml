@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - master
+  # weekly: Mondays 6:03 am, UTC (replaces CircleCI 'weekly' buildx job)
+  schedule:
+    - cron: "3 6 * * 1"
 
 jobs:
   build-and-push-image:
