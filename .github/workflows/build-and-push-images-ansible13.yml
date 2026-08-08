@@ -18,3 +18,5 @@ jobs:
       version: "13"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
+      docker_user: ${{ secrets.DOCKER_USER }}
+      docker_pass: ${{ secrets.DOCKER_PASS }}
