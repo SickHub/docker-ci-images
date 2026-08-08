@@ -59,5 +59,7 @@ jobs:
             drpsychick/${{ matrix.image }}:${{ inputs.version }}
             drpsychick/${{ matrix.image }}:git-${{ github.sha }}
           platforms: "linux/amd64,linux/arm64"
+          # ANSIBLE_VERSION is a real per-version parameter (callers pass 8/9/10/...),
+          # NOT a maintained version pin; Renovate manages ansible versions in the Dockerfiles.
           build-args: |
             "ANSIBLE_VERSION=${{ inputs.version }}"
