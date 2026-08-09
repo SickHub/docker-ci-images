@@ -1,5 +1,8 @@
 ARG VERSION=latest
 FROM alpine:$VERSION
+LABEL org.opencontainers.image.authors="drpsychick@drsick.net"
+LABEL org.opencontainers.image.description="x86 CI image: ArgoCD, Helm, chart-testing, kubectl, kustomize, kubeseal"
+LABEL org.opencontainers.image.source="https://github.com/SickHub/docker-ci-images"
 
 RUN apk add --update --no-cache ca-certificates git curl jq py3-pip socat \
     && pip3 install --break-system-packages yamllint yamale

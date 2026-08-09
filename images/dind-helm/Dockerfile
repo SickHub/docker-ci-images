@@ -1,5 +1,8 @@
 ARG VERSION=dind
 FROM docker:$VERSION
+LABEL org.opencontainers.image.authors="drpsychick@drsick.net"
+LABEL org.opencontainers.image.description="Docker-in-Docker with kubectl and Helm"
+LABEL org.opencontainers.image.source="https://github.com/SickHub/docker-ci-images"
 
 RUN apk add --update --no-cache ca-certificates git curl jq
 

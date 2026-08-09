@@ -1,5 +1,8 @@
 ARG VERSION=latest
 FROM alpine:$VERSION
+LABEL org.opencontainers.image.authors="drpsychick@drsick.net"
+LABEL org.opencontainers.image.description="MinIO mc client on Alpine Linux"
+LABEL org.opencontainers.image.source="https://github.com/SickHub/docker-ci-images"
 
 RUN apk add --update --no-cache ca-certificates git curl jq
 
