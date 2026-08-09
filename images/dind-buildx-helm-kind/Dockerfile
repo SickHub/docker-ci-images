@@ -1,5 +1,8 @@
 ARG VERSION=latest
 FROM drpsychick/dind-buildx-helm:$VERSION
+LABEL org.opencontainers.image.authors="drpsychick@drsick.net"
+LABEL org.opencontainers.image.description="Docker-in-Docker with buildx, kubectl, Helm, chart-testing, and Kind"
+LABEL org.opencontainers.image.source="https://github.com/SickHub/docker-ci-images"
 
 RUN apk add --update --no-cache py3-pip socat \
     && export VERSION="$(grep VERSION_ID /etc/os-release | cut -d= -f2)" PIP3_EXTRA="" \

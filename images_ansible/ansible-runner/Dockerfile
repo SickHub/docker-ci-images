@@ -1,5 +1,8 @@
 ARG VERSION=noble
 FROM ubuntu:$VERSION AS builder
+LABEL org.opencontainers.image.authors="drpsychick@drsick.net"
+LABEL org.opencontainers.image.description="Ansible runner on Ubuntu with Python venv"
+LABEL org.opencontainers.image.source="https://github.com/SickHub/docker-ci-images"
 
 # install base packages
 RUN <<EOT

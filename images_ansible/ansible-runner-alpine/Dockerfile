@@ -1,5 +1,8 @@
 ARG VERSION=3
 FROM alpine:$VERSION AS builder
+LABEL org.opencontainers.image.authors="drpsychick@drsick.net"
+LABEL org.opencontainers.image.description="Ansible runner on Alpine Linux with Python venv"
+LABEL org.opencontainers.image.source="https://github.com/SickHub/docker-ci-images"
 
 # install base packages
 RUN apk --no-cache add gcc build-base musl-dev libffi-dev python3-dev \

@@ -1,5 +1,8 @@
 ARG VERSION=latest
 FROM drpsychick/dind-buildx:$VERSION
+LABEL org.opencontainers.image.authors="drpsychick@drsick.net"
+LABEL org.opencontainers.image.description="Docker-in-Docker with buildx, kubectl, and Helm"
+LABEL org.opencontainers.image.source="https://github.com/SickHub/docker-ci-images"
 
 # install kubectl: https://github.com/kubernetes/kubectl/releases
 ARG KUBECTL_URL=https://dl.k8s.io/release
