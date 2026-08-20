@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.source="https://github.com/SickHub/docker-ci-imag
 # install kubectl: https://github.com/kubernetes/kubectl/releases
 ARG KUBECTL_URL=https://dl.k8s.io/release
 # github-releases:kubernetes/kubernetes
-ARG KUBECTL_VERSION=v1.36.3
+ARG KUBECTL_VERSION=v1.36.4
 ARG TARGETARCH
 ARG KUBECTL_ARCH=${TARGETARCH}
 
