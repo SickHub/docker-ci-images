@@ -9,7 +9,7 @@ RUN apk add --update --no-cache ca-certificates git curl jq
 # install buildx
 ARG BUILDX_URL=https://github.com/docker/buildx/releases
 # github-releases:docker/buildx
-ARG BUILDX_VERSION=v0.36.1
+ARG BUILDX_VERSION=v0.37.0
 # TARGETARCH requires 'DOCKER_BUILDKIT=1'
 ARG TARGETARCH
 ARG BUILDX_ARCH=${TARGETARCH}
