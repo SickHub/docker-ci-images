@@ -171,14 +171,15 @@ Run Ansible playbooks
 
 # Misc images
 
-## [drpsychick/minio-client](./images/minio-client)
-[![Docker image](https://img.shields.io/docker/image-size/drpsychick/minio-client?sort=date)](https://hub.docker.com/r/drpsychick/minio-client/tags)
-[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/minio-client.svg)](https://hub.docker.com/r/drpsychick/minio-client/)
-[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/minio-client.svg)](https://hub.docker.com/r/drpsychick/minio-client/)
+## [drpsychick/s5cmd](./images_misc/s5cmd)
+[![Docker image](https://img.shields.io/docker/image-size/drpsychick/s5cmd?sort=date)](https://hub.docker.com/r/drpsychick/s5cmd/tags)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/drpsychick/s5cmd.svg)](https://hub.docker.com/r/drpsychick/s5cmd/)
+[![DockerHub stars](https://img.shields.io/docker/stars/drpsychick/s5cmd.svg)](https://hub.docker.com/r/drpsychick/s5cmd/)
 ![architectures](https://img.shields.io/badge/arch-amd64,arm64-green)
 
 Up- and download files from any S3 compatible service
 * based on `alpine`
+* includes `s5cmd`
 
 ### Usage
 * use it as pipeline image to up- or download files from S3.
