@@ -25,7 +25,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        image: ["minio-client"]
+        image: ["s5cmd"]
 
     steps:
       - name: Checkout repository
